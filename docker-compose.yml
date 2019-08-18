@@ -1,0 +1,28 @@
+version: '3'
+services:
+  # mysqlのコンテナ
+  db: 
+    # dbのイメージ指定。ない場合はpullする
+    image: mysql:5.7
+    # 環境変数を追加(MySQLのパスワードを設定)
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: root
+    ports:
+      - "3306:3306"
+
+  # Railsのコンテナ. コンテナの名前？
+  # コンテナ名なのでなんでもいい
+  web:
+    # Dockerfileがあるディレクトリ
+    build: .
+    # buildした時に実行するコマンド
+    command: bundle exec rails s -p 3000 -b '0.0.0.0'
+    # ホスト上のディレクトリをコンテナにマウント
+    volumes:
+      - .:/app_name   # このフォルダを`/app`にマウントするという意味です。
+    # # ポートをバインドします.ポート番号を指定. [ホスト：コンテナ]で設定
+    ports:
+      - "3000:3000"   # ローカルの3000ポートにアクセスした時に、コンテナの3000ポートにアクセスする
+    depends_on:
+      - db
