@@ -1,2 +1,27 @@
-h1 Users#new
-p Find me in app/views/users/new.html.slim
+section#register.register
+  .register-box
+    .register-inner
+      h1.register-tit
+
+      = form_with model: @user, local: true do |f|
+        .form-group.register-form
+          = f.label :name, class: 'register-label'
+          = f.text_field :name, class: 'form-control register-field'
+
+        .form-group.register-form
+          = f.label :email, class: 'register-label'
+          = f.text_field :email, class: 'form-control register-field'
+
+        .form-group.register-form
+          = f.label :height, class: 'register-label'
+          = f.number_field :height, step: 0.1, class: 'form-control register-field'
+
+        .form-group.register-form
+          = f.label :password, class: 'register-label'
+          = f.password_field :password, class: 'form-control register-field'
+
+        .form-group.register-form
+          = f.label :password_confirmation, class: 'register-label'
+          = f.password_field :password_confirmation, class: 'form-control register-field'
+
+        = f.submit '登録する', class: 'btn btn-primary register-submit'
