@@ -1,0 +1,16 @@
+@charset "UTF-8";
+
+.inner {
+    width: 90%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+$header-height: 60px;
+
+$layout-width-inner: 1180px;
+$breakpoints: (
+    // 'sp': 'screen and (max-width: 767px)',
+    tab: screen and (min-width: 767px),
+    pc: screen and (min-width: #{$layout-width-inner}),
+)!default;

@@ -1,0 +1,11 @@
+section#newrec.newrec
+  .inner
+    h1.newrec-tit 体重を記録する
+
+    = form_with model: @record, local: true do |f|
+      .form-group.newrec-form
+        = f.label :weight, class: 'newrec-label'
+        = f.text_field :weight, class: 'form-control newrec-field'
+
+      = f.submit 'Record!!', class: 'btn btn-primary newrec-submit'
+

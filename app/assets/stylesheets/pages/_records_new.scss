@@ -1,0 +1,16 @@
+.newrec {
+  padding-top: 80px;
+
+  &-form {
+    display: flex;
+    padding-top: 20px;
+
+    .newrec-label {
+      margin-right: 20px;
+    }
+  }
+
+  &-submit {
+    margin-top: 10px;
+  }
+}

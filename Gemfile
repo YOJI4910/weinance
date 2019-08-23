@@ -64,3 +64,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 # slim導入
 gem 'slim-rails'
 gem 'html2slim'
+# bootstrap導入
+gem 'bootstrap'
+#password_digest用
+gem 'bcrypt'

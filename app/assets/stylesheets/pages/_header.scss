@@ -1,0 +1,56 @@
+#header {
+  width: 100%;
+  height: $header-height;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: $main-color;
+  z-index: 999;
+
+  .inner {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .header-logo {
+      font-size: 4rem;
+
+      a {
+        color: $logo-color;
+        text-decoration: none;
+
+        &:hover {
+          opacity: 0.8;
+        }
+      }
+    }
+
+    .header-list {
+      width: 100%;
+      max-width: 400px;
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+
+      .header-item {
+
+        a {
+          text-decoration: none;
+          font-weight: bold;
+          color: $gray-color;
+        }
+        
+        &._register {
+          background-color: $logo-color;
+          border-radius: 20%;
+          padding: 5px;
+
+          a {
+            color: #000000;
+          }
+        }
+      }
+    }
+  }
+}

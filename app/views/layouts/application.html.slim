@@ -1,0 +1,32 @@
+doctype html
+html
+  head
+    title
+      | AppName
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+  body
+    header#header
+      .inner
+        h1.header-logo
+          = link_to "Weinance", "#"
+
+        ul.header-list
+          li.header-item  
+            = link_to "Home", "#"
+          li.header-item  
+            = link_to "About", "#"
+          li.header-item  
+            = link_to "Users", "#"
+          li.header-item
+            = link_to "LogIn", "#"
+          li.header-item._register
+            = link_to "Register", new_user_path
+    
+    .flash
+      - if flash.notice.present?
+        .alert.alert-success= flash.notice
+
+    = yield
