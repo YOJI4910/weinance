@@ -30,3 +30,6 @@ html
         .alert.alert-success= flash.notice
 
     = yield
+
+    .record-btn 
+      = link_to "+", new_record_path

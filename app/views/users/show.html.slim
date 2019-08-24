@@ -1,2 +1,25 @@
-h1 Users#show
-p Find me in app/views/users/show.html.slim
+section#show
+  h1.show-name
+
+  dl.user-info
+    dt.user-dt height
+    dd.user-dd= @user.height
+
+    dt.user-dt created_at
+    dd.user-dd= @user.created_at
+  
+  dl.show-list
+    dt.show-dt Last Weight
+    dd.show-dd
+
+    dt.show-dt 1week Change
+    dd.show-dd
+
+    dt.show-dt 1month Max
+    dd.show-dd
+
+    dt.show-dt 1month min
+    dd.show-dd
+
+    dt.show-dt BMI
+    dd.show-dd

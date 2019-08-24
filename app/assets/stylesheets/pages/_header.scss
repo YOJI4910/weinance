@@ -54,3 +54,26 @@
     }
   }
 }
+
+.record-btn {
+  height: 50px;
+  width: 50px;
+  background: $main-color;
+  border-radius: 50%;
+  position: fixed;
+  right: 50px;
+  bottom: 50px;
+  font-size: 4rem;
+  font-weight: bold;
+  text-align: center;
+  line-height: 40px;
+
+  a {
+    color: $logo-color;
+  }
+
+  &:hover {
+    opacity: 0.8;
+    cursor: pointer;
+  }
+}
