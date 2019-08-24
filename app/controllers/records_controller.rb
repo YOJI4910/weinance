@@ -1,5 +1,8 @@
 class RecordsController < ApplicationController
+  before_action :login_required
+
   def index
+    @tasks = current_user.records
   end
 
   def show
@@ -10,9 +13,13 @@ class RecordsController < ApplicationController
   end
 
   def create
-    record = Record.new(record_params)
-    record.save!
-    redirect_to root_url, notice: '体重を記録しました。'
+    @record = current_user.records.new(task_params)
+
+    if @record.save
+      redirect_to root_url, notice: '体重を記録しました。'
+    else
+      render :new
+    end
   end
 
   def edit

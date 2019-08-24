@@ -30,4 +30,6 @@ section#users
         /       td= user.user.goal
         /       td= link_to user.user.name, '#'
 
-    = link_to '新規投稿', new_user_path, class: 'btn btn-primary'
+  - if current_user
+    .record-btn 
+      = link_to "+", new_record_path

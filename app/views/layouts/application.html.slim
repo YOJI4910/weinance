@@ -18,12 +18,16 @@ html
             = link_to "Home", "#"
           li.header-item  
             = link_to "About", "#"
-          li.header-item  
-            = link_to "Users", "#"
-          li.header-item
-            = link_to "LogIn", "#"
-          li.header-item._register
-            = link_to "Register", new_user_path
+          - if current_user
+            li.header-item  
+              = link_to "Users", "#"
+            li.header-item
+              = link_to 'LogOut', logout_path, method: :delete
+          - else
+            li.header-item
+              = link_to "LogIn", login_path
+            li.header-item._register
+              = link_to "Register", new_user_path
     
     .flash
       - if flash.notice.present?
@@ -31,5 +35,3 @@ html
 
     = yield
 
-    .record-btn 
-      = link_to "+", new_record_path

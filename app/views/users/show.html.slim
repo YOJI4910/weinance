@@ -8,6 +8,9 @@ section#show
     dt.user-dt created_at
     dd.user-dd= @user.created_at
   
+  = link_to 'ユーザー情報の編集', edit_user_path(@user)
+  = link_to 'ユーザーを削除する', destroy_user_path(@user)
+  
   dl.show-list
     dt.show-dt Last Weight
     dd.show-dd
