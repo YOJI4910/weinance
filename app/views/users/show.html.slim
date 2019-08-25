@@ -1,28 +1,31 @@
-section#show
-  h1.show-name
+section#show.show
+  .inner
+    h1.show-name= @user.name
 
-  dl.user-info
-    dt.user-dt height
-    dd.user-dd= @user.height
+    .user-info
+      dl.user-dl
+        dt.user-dt 身長
+        dd.user-dd= "#{@user.height} cm"
+      dl.user-dl
+        dt.user-dt 登録日
+        dd.user-dd= @user.created_at.strftime("%Y年%m月%d日")
 
-    dt.user-dt created_at
-    dd.user-dd= @user.created_at
+      .user-manage
+        = link_to '編集', edit_user_path(@user), class:'btn btn-danger manage-item'
+        = link_to '削除', @user, method: :delete, class:'btn btn-danger manage-item'
   
-  = link_to 'ユーザー情報の編集', edit_user_path(@user)
-  = link_to 'ユーザーを削除する', @user, method: :delete
-  
-  dl.show-list
-    dt.show-dt Last Weight
-    dd.show-dd
+    dl.show-list
+      dt.show-dt Last Weight
+      dd.show-dd= @user.records.last.weight
 
-    dt.show-dt 1week Change
-    dd.show-dd
+      dt.show-dt 1month Change
+      dd.show-dd  
 
-    dt.show-dt 1month Max
-    dd.show-dd
+      dt.show-dt 1month Max
+      dd.show-dd
 
-    dt.show-dt 1month min
-    dd.show-dd
+      dt.show-dt 1month min
+      dd.show-dd
 
-    dt.show-dt BMI
-    dd.show-dd
+      dt.show-dt BMI
+      dd.show-dd
