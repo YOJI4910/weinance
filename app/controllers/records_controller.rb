@@ -13,7 +13,7 @@ class RecordsController < ApplicationController
   end
 
   def create
-    @record = current_user.records.new(task_params)
+    @record = current_user.records.new(record_params)
 
     if @record.save
       redirect_to root_url, notice: '体重を記録しました。'

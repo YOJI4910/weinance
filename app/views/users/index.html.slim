@@ -15,7 +15,7 @@ section#users
           tr
             th Name
             th Last Weight
-            th 1w Change
+            th 1m Change
             th BMI
             th Date
             th Goal
@@ -23,8 +23,12 @@ section#users
         tbody.users-table-body
           - @users.each do |user|
             tr id="user-#{user.id}"
-                td= link_to user.name, user
-        /       td= @change
+              td= link_to user.name, user
+              td= user.records.last.weight
+              - if change(user).round(2) >= 0
+                td= sprintf("%+d", change(user).round(2))
+              - else
+                td= change(user).round(2)
         /       td= @bmi
         /       td= user.created_at
         /       td= user.user.goal

@@ -1,4 +1,4 @@
-class UsersController < ApplicationController
+class UsersController < ApplicationController  
   before_action :login_required, only: [:edit, :update, :destroy]
 
   def index
@@ -13,7 +13,9 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     
     if @user.save
-      redirect_to @user, notice:"ユーザー「#{@user.name}」を行いました。"
+      # 登録と同時にログイン
+      session[:user_id] = @user.id
+      redirect_to root_url, notice:"ユーザー「#{@user.name}」を登録しました。"
     else
       render :new
     end

@@ -9,7 +9,7 @@ section#show
     dd.user-dd= @user.created_at
   
   = link_to 'ユーザー情報の編集', edit_user_path(@user)
-  = link_to 'ユーザーを削除する', destroy_user_path(@user)
+  = link_to 'ユーザーを削除する', @user, method: :delete
   
   dl.show-list
     dt.show-dt Last Weight
