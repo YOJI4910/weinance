@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   # ヘルパーにすることですべてのviewからも呼び出せる
   helper_method :current_user
   helper_method :change
+  helper_method :bmi
 
 
   private
@@ -21,6 +22,12 @@ class ApplicationController < ActionController::Base
     last_avg = last_data.sum / last_count
     this_data = user.records.last.weight
     @change = ( ( this_data - last_avg ) / last_avg )*100
+  end
+
+  def bmi(user)
+    # 身長 cm > m
+    height_m = user.height / 100
+    @bmi = user.records.last.weight / (height_m * height_m)
   end
 
 end

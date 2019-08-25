@@ -26,11 +26,11 @@ section#users
               td= link_to user.name, user
               td= user.records.last.weight
               - if change(user).round(2) >= 0
-                td= sprintf("%+d", change(user).round(2))
+                td.pluscolor= sprintf("%+d%%", change(user).round(2))
               - else
-                td= change(user).round(2)
-        /       td= @bmi
-        /       td= user.created_at
+                td.minuscolor= sprintf("%d%%", change(user).round(2))
+              td= bmi(user).round(1)
+              td= user.records.last.created_at.strftime("%Y/%m/%d")
         /       td= user.user.goal
         /       td= link_to user.user.name, '#'
 

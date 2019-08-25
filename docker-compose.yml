@@ -4,6 +4,9 @@ services:
   db: 
     # dbのイメージ指定。ない場合はpullする
     image: mysql:5.7
+    # ローカル./mysqlとコンテナ/var/lib/mysqlを同期
+    volumes:
+      - ./mysql:/var/lib/mysql
     # 環境変数を追加(MySQLのパスワードを設定)
     environment:
       MYSQL_ROOT_PASSWORD: password
