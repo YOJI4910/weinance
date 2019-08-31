@@ -19,13 +19,50 @@ section#show.show
       dd.show-dd= @user.records.last.weight
 
       dt.show-dt 1month Change
-      dd.show-dd  
+      dd.show-dd= change(@user).round(1)
 
       dt.show-dt 1month Max
-      dd.show-dd
+      dd.show-dd= max_weight(@user)
 
       dt.show-dt 1month min
-      dd.show-dd
+      dd.show-dd= min_weight(@user)
 
       dt.show-dt BMI
-      dd.show-dd
+      dd.show-dd= bmi(@user).round(1)
+
+    canvas#myChart
+
+javascript:
+  var ctx = document.getElementById("myChart").getContext('2d');
+  var Graph = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: #{{@labels.to_json}},
+      datasets: [
+        {
+          label: '過去1ヶ月の体重の変化',
+          data: #{{@datas.to_json}},
+          borderColor: 'rgba(255,0,0,1)',
+          backgroundColor: 'rgba(0,0,0,0)'
+        }
+      ],
+    },
+    option: {
+      title: {
+        display: true,
+        text: 'ゴミ(８月３周)'
+      },
+      scales: {
+        yAxes: [{
+          ticks: {
+            suggestedMax: 10,
+            suggestedMin: 0,
+            stepSize: 2,
+            callback: function(value, index, values) {
+              return value + 'kg'
+            }
+          }
+        }]
+      },
+    }
+  });

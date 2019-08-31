@@ -4,7 +4,8 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
   helper_method :change
   helper_method :bmi
-
+  helper_method :max_weight
+  helper_method :min_weight
 
   private
   
@@ -22,12 +23,29 @@ class ApplicationController < ActionController::Base
     last_avg = last_data.sum / last_count
     this_data = user.records.last.weight
     @change = ( ( this_data - last_avg ) / last_avg )*100
+  rescue ZeroDivisionError
+    0
   end
 
   def bmi(user)
-    # 身長 cm > m
-    height_m = user.height / 100
-    @bmi = user.records.last.weight / (height_m * height_m)
+    if user.records.present?
+      # 身長 cm > m
+      height_m = user.height / 100
+      @bmi = ( user.records.last.weight / (height_m * height_m) ).round(1)
+    else
+      @bmi = "-"
+    end
   end
 
+  def max_weight(user)
+    # 過去30日の最高体重を返す
+    pre30_data = user.records.where('created_at >= ?', 30.days.ago).pluck('weight')
+    @max_weight = pre30_data.max
+  end
+
+  def min_weight(user)
+    # 過去30日の最小体重を返す
+    pre30_data = user.records.where('created_at >= ?', 30.days.ago).pluck('weight')
+    @min_weight = pre30_data.min
+  end
 end

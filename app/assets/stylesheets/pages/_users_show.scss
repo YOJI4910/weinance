@@ -1,0 +1,54 @@
+.show {
+  &-name {
+    text-align-last: left;
+    padding-top: 20px;
+  }
+
+  .user-info {
+    display: flex;
+    align-items: center;
+
+    .user-dl {
+      text-align-last: left;
+      
+      &:first-of-type {
+        margin-right: 30px;
+      }
+    }
+
+    .user-manage {
+      display: flex;
+      margin-left: 30px;
+
+      .manage-item {
+        font-size: 1.4rem;
+        width: 60px;
+        height: 30px;
+
+        &:first-of-type {
+          margin-right: 10px;
+        }
+      }
+    }
+  }
+
+  .show-list {
+    width: 50%;
+    min-width: 300px;
+    padding-top: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 auto;
+
+    .show-dt {
+      width: 50%;
+      text-align: right;
+      margin-bottom: 20px;
+    }
+
+    .show-dd {
+      width: 50%;
+      text-align-last: right;
+    }
+  }
+}

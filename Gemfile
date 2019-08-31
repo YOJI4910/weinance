@@ -39,6 +39,8 @@ gem 'bootsnap', '>= 1.1.0', require: false
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  # faker gem for seed data
+  gem 'faker'
 end
 
 group :development do
@@ -68,3 +70,6 @@ gem 'html2slim'
 gem 'bootstrap'
 #password_digest用
 gem 'bcrypt'
+# chart.js
+gem 'chart-js-rails'
+gem 'gon'

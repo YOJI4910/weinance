@@ -5,3 +5,45 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+
+
+User.create!(
+  name: "first",
+  email: "first@example.com",
+  height: 174.0,
+  password: 'password',
+  password_confirmation: 'password'
+)
+
+r = Random.new()
+
+50.times do |n|
+  name = Faker::Name.name
+  email = "exsample-#{n+1}@example.com"
+  height = r.rand(150.0..185.0).round(1)
+  password = 'password'
+  User.create!(
+    name: name,
+    email: email,
+    height: height,
+    password: password,
+    password_confirmation: password
+  )
+end
+
+r2 = Random.new()
+users= User.order(:created_at).take(5)
+
+80.times do |n|
+  weight = r2.rand(35.0..120.0)
+  to = Date.today
+  from = Date.today - 60.days
+
+  users.each do |user|
+    user.records.create!(
+      weight: weight,
+      created_at: r2.rand(from..to)
+    )
+  end
+end

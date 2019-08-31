@@ -22,17 +22,18 @@ section#users
         
         tbody.users-table-body
           - @users.each do |user|
-            tr id="user-#{user.id}"
-              td= link_to user.name, user
-              td= user.records.last.weight
-              - if change(user).round(2) >= 0
-                td.pluscolor= sprintf("%+d%%", change(user).round(2))
-              - else
-                td.minuscolor= sprintf("%d%%", change(user).round(2))
-              td= bmi(user).round(1)
-              td= user.records.last.created_at.strftime("%Y/%m/%d")
-        /       td= user.user.goal
-        /       td= link_to user.user.name, '#'
+            - if user.records.present?
+              tr id="user-#{user.id}"
+                td= link_to user.name, user
+                td= user.records.order(:created_at).last.weight
+                - if change(user).round(2) >= 0
+                  td.pluscolor= sprintf("%+d%%", change(user).round(2))
+                - else
+                  td.minuscolor= sprintf("%d%%", change(user).round(2))
+                td= bmi(user)
+                td= user.records.order(:created_at).last.created_at.strftime("%Y/%m/%d")
+          /       td= user.user.goal
+          /       td= link_to user.user.name, '#'
 
   - if current_user
     .record-btn 
