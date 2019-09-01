@@ -1,27 +1,16 @@
-section#register.register
-  .register-box
-    .register-inner
-      h1.register-tit
+section.register
+  = form_with model: @user, class: 'box', local: true do |f|
+    h1 Register
 
-      = form_with model: @user, local: true do |f|
-        .form-group.register-form
-          = f.label :name, class: 'register-label'
-          = f.text_field :name, class: 'form-control register-field'
+    = f.text_field :name, placeholder: 'User name'
 
-        .form-group.register-form
-          = f.label :email, class: 'register-label'
-          = f.text_field :email, class: 'form-control register-field'
+    = f.text_field :email, placeholder: 'Email'
 
-        .form-group.register-form
-          = f.label :height, class: 'register-label'
-          = f.number_field :height, step: 0.1, class: 'form-control register-field'
+    = f.number_field :height, step: 0.1, placeholder: 'Height'
 
-        .form-group.register-form
-          = f.label :password, class: 'register-label'
-          = f.password_field :password, class: 'form-control register-field'
+    = f.password_field :password, placeholder: 'Password'
 
-        .form-group.register-form
-          = f.label :password_confirmation, class: 'register-label'
-          = f.password_field :password_confirmation, class: 'form-control rheroegister-field'
+    = f.password_field :password_confirmation, placeholder: 'Password again'
 
-        = f.submit '登録する', class: 'btn btn-primary register-submit'
+    = f.submit 'Register'
+
