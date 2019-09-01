@@ -72,4 +72,6 @@ gem 'bootstrap'
 gem 'bcrypt'
 # chart.js
 gem 'chart-js-rails'
-gem 'gon'
+# ユーザー画像の実装
+gem 'carrierwave'
+gem 'mini_magick'

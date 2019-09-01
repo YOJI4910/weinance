@@ -19,14 +19,14 @@ html
           li.header-item  
             = link_to "Home", root_path
           li.header-item  
-            = link_to "About", "#"
+            = link_to "About", about_path
           - if current_user
             li.header-item  
               = link_to "Users", "#"
             li.header-item
               = link_to 'LogOut', logout_path, method: :delete
             li.header-item
-              = current_user.name
+              = link_to current_user.name, current_user
           - else
             li.header-item
               = link_to "LogIn", login_path

@@ -1,0 +1,21 @@
+.about {
+  background: #000;
+  color: #FFF;
+
+  .inner {
+    padding-top: 100px;
+    padding-bottom: 100px;
+  }
+
+  &-tit {
+    font-size: 5rem;
+  }
+  &-copy {
+    padding-top: 20px;
+  }
+  &-counter {
+    display: flex;
+    justify-content: space-around;
+    padding-top: 60px;
+  }
+}
