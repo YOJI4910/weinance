@@ -50,17 +50,14 @@ javascript:
     option: {
       title: {
         display: true,
-        text: 'ゴミ(８月３周)'
+        text: ''
       },
       scales: {
-        yAxes: [{
-          ticks: {
-            suggestedMax: 10,
-            suggestedMin: 0,
-            stepSize: 2,
-            callback: function(value, index, values) {
-              return value + 'kg'
-            }
+        xAxes: [{ //x軸設定
+          type: 'time',
+          time: {
+            unit: 'day',
+            distribution: 'liner'
           }
         }]
       },

@@ -16,16 +16,15 @@ section#users
             th Name
             th Last Weight
             th 1m Change
-            th BMI
+            th.bmi-col BMI
             th Date
-            th Goal
         
         tbody.users-table-body
           - @users.each do |user|
             - if user.records.present?
               tr id="user-#{user.id}"
                 td= link_to user.name, user
-                td= user.records.order(:created_at).last.weight
+                td= "#{user.records.order(:created_at).last.weight.round(1)} kg"
                 - if change(user).round(2) >= 0
                   td.pluscolor= sprintf("%+d%%", change(user).round(2))
                 - else

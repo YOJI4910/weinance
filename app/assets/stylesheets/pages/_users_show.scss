@@ -1,11 +1,13 @@
 .show {
   &-name {
+    font-size: 5rem;
     text-align-last: left;
     padding-top: 20px;
   }
 
   .user-info {
     display: flex;
+    padding-top: 20px;
     align-items: center;
 
     .user-dl {
