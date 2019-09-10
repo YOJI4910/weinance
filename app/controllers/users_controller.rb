@@ -1,8 +1,14 @@
 class UsersController < ApplicationController  
+  include Pagy::Backend
   before_action :login_required, only: [:edit, :update, :destroy]
 
   def index
-    @users = User.all
+    # recordテーブルから重複を省く。}{user_id => latest_record_date}
+    user_hash = Record.group(:user_id).maximum(:created_at)
+
+    # 順のリスト[[user_id, created_at], [k, v], [k, v], ...] vの値で降順
+    user_list = user_hash.sort_by{ |k, v| v }.reverse.to_h.keys
+    @pagy, @users = pagy(User.where(id: user_list))
   end
 
   def new

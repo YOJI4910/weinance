@@ -33,12 +33,12 @@ r = Random.new()
 end
 
 r2 = Random.new()
-users= User.order(:created_at).take(5)
+users= User.order(:created_at).take(38)
 
-80.times do |n|
-  weight = r2.rand(35.0..120.0)
-  to = Date.today
-  from = Date.today - 60.days
+60.times do |n|
+  weight = r2.rand(55.0..100.0)
+  to = Time.zone.now
+  from = to - 60.days
 
   users.each do |user|
     user.records.create!(

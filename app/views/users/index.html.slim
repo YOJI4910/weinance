@@ -35,8 +35,8 @@ section#users
                   td.minuscolor= sprintf("%d%%", change(user).round(2))
                 td= bmi(user)
                 td= user.records.order(:created_at).last.created_at.strftime("%Y/%m/%d")
-          /       td= user.user.goal
-          /       td= link_to user.user.name, '#'
+      .d-flex.justify-content-center.mt-3
+        == pagy_bootstrap_nav(@pagy) 
 
   - if current_user
     .record-btn 

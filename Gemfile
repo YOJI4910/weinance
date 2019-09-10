@@ -75,3 +75,5 @@ gem 'chart-js-rails'
 # ユーザー画像の実装
 gem 'carrierwave'
 gem 'mini_magick'
+#ページネーション
+gem 'pagy'
