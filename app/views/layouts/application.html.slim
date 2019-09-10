@@ -25,7 +25,13 @@ html
             li.header-item
               = link_to 'LogOut', logout_path, method: :delete
             li.header-item
-              = link_to current_user.name, current_user
+              - if current_user.image.thumb40.url.present?
+                  = link_to "#{current_user.image.thumb40.url} #{current_user.name}", current_user
+              - else
+                  = link_to current_user do
+                    = image_tag("/assets/default_top_image.png", size: '40x40', class:"header-user-image")
+                    p.header-user
+                      = current_user.name
           - else
             li.header-item
               = link_to "LogIn", login_path
@@ -37,4 +43,7 @@ html
         .alert.alert-success= flash.notice
 
     = yield
+
+    = debug(params) if Rails.env.development?
+
 

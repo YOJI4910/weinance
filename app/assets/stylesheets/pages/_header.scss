@@ -30,7 +30,7 @@
       width: 100%;
       max-width: 400px;
       display: flex;
-      align-items: baseline;
+      align-items: center;
       justify-content: space-between;
 
       .header-item {
@@ -76,4 +76,12 @@
     opacity: 0.8;
     cursor: pointer;
   }
+}
+
+.header-user-image {
+  border-radius: 50%;
+}
+
+.header-user {
+  font-size: 1.4rem;
 }

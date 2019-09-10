@@ -1,6 +1,11 @@
 section#show.show
   .inner
-    h1.show-name= @user.name
+    .show-head
+      - if @user.image?
+        = image_tag @user.image.thumb.url, class:"top-image"
+      -else
+        = image_tag "/assets/default_top_image.png", class: "top-image", size: '100x100'
+      h1.show-name= @user.name
 
     .user-info
       dl.user-dl

@@ -43,6 +43,20 @@
         td {
           text-align: center;
           vertical-align: middle;
+
+          .table-userimage {
+            object-fit: cover;
+            border-radius: 50%;
+          }
+
+          .table-usernames {
+            display: flex;
+            align-items: center;
+
+            .table-username {
+              margin-left: 5px;
+            }
+          }
         }
       }
     }

@@ -1,4 +1,13 @@
 .show {
+  &-head {
+    display: flex;
+    align-items: center;
+    padding-top: 20px;
+    .top-image {
+      margin-right: 20px;
+    }
+  }
+
   &-name {
     font-size: 5rem;
     text-align-last: left;

@@ -6,5 +6,5 @@ class User < ApplicationRecord
 
   has_many :records
 
-  # mount_uploader :image, ImageUploader
+  mount_uploader :image, ImageUploader
 end
