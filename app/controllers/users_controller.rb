@@ -7,8 +7,8 @@ class UsersController < ApplicationController
     user_hash = Record.group(:user_id).maximum(:created_at)
 
     # 順のリスト[[user_id, created_at], [k, v], [k, v], ...] vの値で降順
-    user_list = user_hash.sort_by{ |k, v| v }.reverse.to_h.keys
-    @pagy, @users = pagy(User.where(id: user_list))
+    ids = user_hash.sort_by{ |k, v| v }.reverse.to_h.keys
+    @pagy, @users = pagy(User.where(id: ids).order("field(id, #{ids.join(',')})"))
   end
 
   def new

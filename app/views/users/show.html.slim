@@ -21,7 +21,7 @@ section#show.show
   
     dl.show-list
       dt.show-dt Last Weight
-      dd.show-dd= @user.records.last.weight
+      dd.show-dd= lastest_weight(@user)
 
       dt.show-dt 1month Change
       dd.show-dd= change(@user).round(1)

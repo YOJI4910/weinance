@@ -28,7 +28,12 @@ gem 'jbuilder', '~> 2.5'
 # gem 'bcrypt', '~> 3.1.7'
 
 # Use ActiveStorage variant
-# gem 'mini_magick', '~> 4.8'
+gem 'mini_magick'
+
+group :production, :development, :test do
+  # faker gem for seed data
+  gem 'faker'
+end
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -39,8 +44,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  # faker gem for seed data
-  gem 'faker'
+  gem 'pry-rails'
 end
 
 group :development do
@@ -66,7 +70,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 # slim導入
 gem 'slim-rails'
 gem 'html2slim'
-# bootstrap導入
+# bootstrap導入doc
 gem 'bootstrap'
 #password_digest用
 gem 'bcrypt'
@@ -74,6 +78,5 @@ gem 'bcrypt'
 gem 'chart-js-rails'
 # ユーザー画像の実装
 gem 'carrierwave'
-gem 'mini_magick'
 #ページネーション
 gem 'pagy'

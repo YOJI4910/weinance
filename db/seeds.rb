@@ -20,7 +20,7 @@ r = Random.new()
 
 50.times do |n|
   name = Faker::Name.name
-  email = "exsample-#{n+1}@example.com"
+  email = "examples-#{n+1}@example.com"
   height = r.rand(150.0..185.0).round(1)
   password = 'password'
   User.create!(
