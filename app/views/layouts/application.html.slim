@@ -20,8 +20,6 @@ html
           li.header-item  
             = link_to "About", about_path
           - if current_user
-            li.header-item  
-              = link_to "Users", "#"
             li.header-item
               = link_to 'LogOut', logout_path, method: :delete
             li.header-item
@@ -37,6 +35,9 @@ html
               = link_to "LogIn", login_path
             li.header-item._register
               = link_to "Register", new_user_path
+    
+    //header分の空スペース
+    .header-space
     
     .flash
       - if flash.notice.present?
