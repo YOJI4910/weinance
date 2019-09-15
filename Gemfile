@@ -80,3 +80,5 @@ gem 'chart-js-rails'
 gem 'carrierwave'
 #ページネーション
 gem 'pagy'
+#font-awesome
+gem 'font-awesome-sass', '~> 5.9.0'

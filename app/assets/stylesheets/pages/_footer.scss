@@ -1,0 +1,24 @@
+.footer {
+  background: $main-color;
+
+  .inner {
+    padding: 20px;
+  }
+
+  .sns-logo {
+    display: flex;
+    justify-content: space-around;
+
+    &-style {
+      font-size: 4rem;
+      color: $gray-color;
+    }
+  }
+
+  .footer-logo {
+    color: $gray-color;
+    padding-top: 20px;
+    font-size: 4rem;
+    font-weight: 700;
+  }
+}

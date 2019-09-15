@@ -1,14 +1,18 @@
 #mv {
   height: 400px;
-  background: url('https://placehold.jp/1300x400.png') no-repeat center center/cover;
+  max-height: 600px;
+  background: rgb(26, 26, 26) url('mv1.svg') no-repeat center center/contain;
   margin-top: 0;
 }
 
 #users {
-  background: $gray-color;
+  background: rgb(240, 240, 240);
+  padding-top: 20px;
+  padding-bottom: 20px;
 
   .inner {
     background: #fff;
+    padding-bottom: 20px;
 
     .users-search {
       text-align: center;
@@ -30,6 +34,10 @@
         }
         .bmi-col {
           width: 80px;
+        }
+
+        .date-col {
+          width: 160px;
         }
       }
 
