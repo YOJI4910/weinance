@@ -15,9 +15,10 @@ section#show.show
         dt.user-dt 登録日
         dd.user-dd= @user.created_at.strftime("%Y年%m月%d日")
 
-      .user-manage
-        = link_to '編集', edit_user_path(@user), class:'btn btn-danger manage-item'
-        = link_to '削除', @user, method: :delete, class:'btn btn-danger manage-item'
+      - if current_user == @user
+        .user-manage
+          = link_to '編集', edit_user_path(@user), class:'btn btn-danger manage-item'
+          = link_to '削除', @user, method: :delete, class:'btn btn-danger manage-item'
   
     dl.show-list
       dt.show-dt Last Weight
