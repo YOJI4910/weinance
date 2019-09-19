@@ -1,24 +1,24 @@
-# README
+## Weinanceの概要
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Web上で体重を記録し、共有できるサービスです。
 
-Things you may want to cover:
+## 実装機能
 
-* Ruby version
+### ユーザー関連
+* ユーザー登録機能
+* ログイン認証 ( bycrypt )
+* ユーザー情報の編集機能
 
-* System dependencies
+### 記録関連
+* 体重グラフ機能 ( Chart.js )
+* 一覧表示機能
+*  ページネーション機能 ( pagy )
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## その他
+### 開発環境
+* Ruby 2.6.3
+* Rails 5.2.3
+* MySQL
+* Dockerによる開発環境のコード化
+### 本番環境
+* heroku
