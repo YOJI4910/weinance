@@ -27,5 +27,13 @@ services:
     # # ポートをバインドします.ポート番号を指定. [ホスト：コンテナ]で設定
     ports:
       - "3000:3000"   # ローカルの3000ポートにアクセスした時に、コンテナの3000ポートにアクセスする
+    # webはdbに依存。 起動順がdb→chrome→webになる。
     depends_on:
       - db
+      - chrome
+
+  # Headless chrome用
+  chrome:
+    image: selenium/standalone-chrome
+    ports:
+      - "4444:4444"

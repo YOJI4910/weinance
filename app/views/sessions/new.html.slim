@@ -2,8 +2,8 @@ section.login
   = form_with scope: :session, class:'box', local: true do |f|
     h1 LogIn
 
-    = f.text_field :email, placeholder: 'Email'
+    = f.text_field :email, placeholder: 'Email', id: 'session_email'
 
-    = f.password_field :password, placeholder: 'Password'
+    = f.password_field :password, placeholder: 'Password', id: 'session_password'
 
     = f.submit 'LogIn'
