@@ -1,4 +1,5 @@
 require 'spec_helper'
+
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
 # Prevent database truncation if the environment is production
@@ -24,6 +25,9 @@ rescue ActiveRecord::PendingMigrationError => e
 end
 
 RSpec.configure do |config|
+
+  config.use_transactional_fixtures = true
+
   config.before(:each, type: :system) do
     driven_by :rack_test
   end

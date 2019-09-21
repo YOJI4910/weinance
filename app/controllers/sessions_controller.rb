@@ -3,14 +3,15 @@ class SessionsController < ApplicationController
   end
 
   def create
-    user = User.find_by(email: session_params[:email])
+    @user = User.find_by(email: session_params[:email])
 
     # authenticate(): password一致でtrue, 不一致でfalse
     # &.: objectがnilだったらNoMethodError返す。
-    if user&.authenticate(session_params[:password])
-      session[:user_id] = user.id
+    if @user&.authenticate(session_params[:password])
+      session[:user_id] = @user.id
       redirect_to root_url, notice:"ログインしました"
     else
+      flash.now[:danger] = 'メールアドレスもしくは名前が一致しません。'
       render :new
     end
   end

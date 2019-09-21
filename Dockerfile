@@ -23,12 +23,12 @@ WORKDIR $APP_ROOT
 # COPY: ローカルファイルをコンテナへコピー(ホスト→コンテナ)
 # ADD: ファイル、ディレクトリなどをコンテナの指定されたパスにコピー
 # ホスト側（ローカル）のGemfileを追加する
-ADD ./Gemfile $APP_ROOT/Gemfile
-ADD ./Gemfile.lock $APP_ROOT/Gemfile.lock
+COPY ./Gemfile $APP_ROOT/Gemfile
+COPY ./Gemfile.lock $APP_ROOT/Gemfile.lock
 
 # Gemfileのbundle install
 RUN bundle install
-ADD . $APP_ROOT
+COPY . $APP_ROOT
 
 # docker-compose up: dockerfileを基にコンテナの作成と開始
 # docker exec -it todo_app_1 /bin/bash: dockerの中に入る

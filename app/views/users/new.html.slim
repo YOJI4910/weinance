@@ -1,7 +1,7 @@
 section.register
   = form_with model: @user, class: 'box', local: true do |f|
     h1 Register
-    = render 'shared/error_message'
+    = render partial: 'shared/error_message', locals: { model: f.object }
 
     = f.text_field :name, placeholder: 'User name'
 

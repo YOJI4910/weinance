@@ -1,7 +1,7 @@
-- if @user.errors.any?
-  .error_explanation
-    .alert.alert-danger
-      = "The form contains #{pluralize(@user.errors.count, 'error')}."
-    ul
-      - @user.errors.full_messages.each do |msg|
+- if model.errors.any?
+  .error-wrapper
+    h3.error-alert
+      = "The form contains #{pluralize(model.errors.count, 'error')}."
+    ul.error-detail
+      - model.errors.full_messages.each do |msg|
         li= msg
