@@ -17,6 +17,23 @@
       text-transform: uppercase;
     }
 
+    .gest-account {
+      width: 300px;
+      height: 100px;
+      color: #fff;
+      margin: 0 auto;
+      margin-top: 10px;
+      padding: 5px;
+      padding-bottom: 0;
+      border: 1px solid #fff;
+
+      .gest-account-info {
+        dt {
+          float: left;
+        }
+      }
+    }
+
     input[type="text"], input[type="password"] {
       border: 0;
       background: none;

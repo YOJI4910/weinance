@@ -1,7 +1,14 @@
 section.login
   = form_with scope: :session, class:'box', local: true do |f|
     h1 LogIn
-    // = render partial: 'shared/error_message', locals: { model: f.object }
+
+    .gest-account
+      p ゲスト用アカウント
+      dl.gest-account-info
+        dt emailアドレス：
+        dd first@example.com
+        dt パスワード：
+        dd password
 
     = f.text_field :email, placeholder: 'Email', id: 'session_email'
 

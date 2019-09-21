@@ -11,30 +11,31 @@ html
   body
     header#header
       .inner
-        h1.header-logo
-          = link_to "Weinance", root_path
+        nav
+          h1.header-logo
+            = link_to "Weinance", root_path
 
-        ul.header-list
-          li.header-item  
-            = link_to "Home", root_path
-          li.header-item  
-            = link_to "About", about_path
-          - if current_user
-            li.header-item
-              = link_to 'LogOut', logout_path, method: :delete
-            li.header-item
-              - if current_user.image.thumb40.url.present?
-                  = link_to "#{current_user.image.thumb40.url} #{current_user.name}", current_user
-              - else
-                  = link_to current_user do
-                    = image_tag("/assets/default_top_image.png", size: '40x40', class:"header-user-image")
-                    p.header-user
-                      = current_user.name
-          - else
-            li.header-item
-              = link_to "LogIn", login_path
-            li.header-item._register
-              = link_to "Register", new_user_path
+          ul.header-list
+            li.header-item  
+              = link_to "Home", root_path
+            li.header-item  
+              = link_to "About", about_path
+            - if current_user
+              li.header-item
+                = link_to 'LogOut', logout_path, method: :delete
+              li.header-item
+                - if current_user.image.thumb40.url.present?
+                    = link_to "#{current_user.image.thumb40.url} #{current_user.name}", current_user
+                - else
+                    = link_to current_user do
+                      = image_tag("/assets/default_top_image.png", size: '40x40', class:"header-user-image")
+                      p.header-user
+                        = current_user.name
+            - else
+              li.header-item
+                = link_to "LogIn", login_path
+              li.header-item._register
+                = link_to "Register", new_user_path
     
     //header分の空スペース
     .header-space
