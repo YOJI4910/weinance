@@ -39,6 +39,10 @@
         .date-col {
           width: 160px;
         }
+
+        .follow-col {
+          width: 4rem;
+        }
       }
 
       &-head {
@@ -53,6 +57,9 @@
           vertical-align: middle;
           height: 50px;
 
+          .follow-btn {
+            font-size: 2rem;
+          }
           .table-userimage {
             object-fit: cover;
             border-radius: 50%;
