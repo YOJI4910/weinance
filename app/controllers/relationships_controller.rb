@@ -2,21 +2,18 @@ class RelationshipsController < ApplicationController
   before_action :login_required
 
   def create
+    follow_user = User.find(params[:user_id])
+    current_user.follow(follow_user)
+    # フォロー後user情報更新
     @follow_user = User.find(params[:user_id])
-    current_user.follow(@follow_user)
-    respond_to do |format|
-      format.html { redirect_to root_url }
-      format.js
-    end
+    # create.js.erbでrenderされる
   end
 
   def destroy
-    follow = current_user.active_relationships.find_by(follower_id: params[:user_id])
-    # current_user.unfollow(follow)
-    follow.destroy
-    respond_to do |format|
-      format.html { redirect_to root_url }
-      format.js
-    end
+    follow_user = current_user.active_relationships.find_by(follower_id: params[:user_id])
+    follow_user.destroy
+    # アンフォロー後user情報更新
+    @follow_user = User.find(params[:user_id])
+    # destroy.js.erbでrender
   end
 end

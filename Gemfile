@@ -84,3 +84,5 @@ gem 'carrierwave'
 gem 'pagy'
 #font-awesome
 gem 'font-awesome-sass', '~> 5.9.0'
+# jquery
+gem "jquery-rails"
