@@ -6,13 +6,14 @@ section#users
     .users-search
       / 検索ボックス
     .users-body
-      .users-body-tabs
-        <input id="all-users" type="radio" name="tab-item" checked>
-        <label class="tab-item _all-label" for="all-users">All</label>
-        <input id="fav-users" type="radio" name="tab-item">
-        <label class="tab-item _fav-label" for="fav-users">Favorites</label>
+      ul.nav.nav-tabs
+        li.nav-item
+          a href="#all-content" class="nav-link #{ 'active' unless params[:active_tab] == 'favs' }" data-toggle="tab" All
+        li.nav-item
+          a href="#fav-content" class="nav-link #{ 'active' if params[:active_tab] == 'favs' }" data-toggle="tab" Favorites
 
-        .tab-content#all-content
+      .tab-content
+        div id="all-content" class="tab-pane #{ 'active' unless params[:active_tab] == 'favs' }"
           table.users-table
             thead.users-table-head
               tr
@@ -44,7 +45,7 @@ section#users
           .d-flex.justify-content-center.mt-3
             == pagy_bootstrap_nav(@pagy_all) 
 
-        .tab-content#fav-content
+        div id="fav-content" class="tab-pane #{ 'active' if params[:active_tab] == 'favs' }"
           - if current_user.present?
             table.users-table
               thead.users-table-head

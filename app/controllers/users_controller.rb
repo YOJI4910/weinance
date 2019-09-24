@@ -8,7 +8,7 @@ class UsersController < ApplicationController
 
     # 順のリスト[[user_id, created_at], [k, v], [k, v], ...] vの値で降順
     ids = user_hash.sort_by{ |k, v| v }.reverse.to_h.keys
-    @pagy_all, @users = pagy(User.where(id: ids).order("field(id, #{ids.join(',')})"), page_param: :page_all)
+    @pagy_all, @users = pagy(User.where(id: ids).order("field(id, #{ids.join(',')})"), page_param: :page_all, params: { active_tab: 'all' })
 
     # ======================favo用
     # current_userのfollowingリスト
@@ -16,7 +16,7 @@ class UsersController < ApplicationController
       follow_list = current_user.active_relationships.pluck(:follower_id)
       favo_hash = Record.where(user_id: follow_list).group(:user_id).maximum(:created_at)
       f_ids = favo_hash.sort_by{ |k, v| v }.reverse.to_h.keys
-      @pagy_fav, @favos = pagy(User.where(id: f_ids).order("field(id, #{f_ids.join(',')})"), page_param: :page_fav)
+      @pagy_fav, @favos = pagy(User.where(id: f_ids).order("field(id, #{f_ids.join(',')})"), page_param: :page_fav, params: { active_tab: 'favs' })
     end
   end
 

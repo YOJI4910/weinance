@@ -21,42 +21,8 @@
     .users-body {
       padding-top: 10px;
 
-      &-tabs {
-        text-align: left;
-
-        .tab-item {
-          display: inline-block;
-          padding: 3px;
-          padding-top: 0;
-          font-size: 3rem;
-          margin-left: 25px;
-          margin-bottom: 5px;
-          cursor: pointer;
-        }
-
-        #all-users:checked ~ ._all-label,
-        #fav-users:checked ~ ._fav-label{
-          color: #f1c40f;
-          font-weight: bold;
-          border-bottom: 2px solid #f1c40f;
-        }
-
-        input[name="tab-item"] {
-          display: none;
-        }
-
-        .tab-content {
-          display: none;
-          overflow: hidden;
-        }
-
-        #all-users:checked ~ #all-content,
-        #fav-users:checked ~ #fav-content {
-          display: block;
-        }
-
         .logout-tab-content {
-          padding: 250px 0;
+          padding: 265px 0;
           text-align: center;
           font-size: 3rem;
         }
@@ -110,7 +76,6 @@
         }
       }
     }
-  }
 }
 
 .pluscolor {
