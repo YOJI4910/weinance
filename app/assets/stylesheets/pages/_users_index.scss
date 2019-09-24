@@ -54,6 +54,12 @@
         #fav-users:checked ~ #fav-content {
           display: block;
         }
+
+        .logout-tab-content {
+          padding: 250px 0;
+          text-align: center;
+          font-size: 3rem;
+        }
       }
       
       .users-table-head {
