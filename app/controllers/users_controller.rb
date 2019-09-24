@@ -12,8 +12,8 @@ class UsersController < ApplicationController
 
     # ======================favo用
     # current_userのfollowingリスト
-    if current_user.present?
-      follow_list = current_user.active_relationships.pluck(:follower_id)
+    follow_list = current_user.active_relationships.pluck(:follower_id) if current_user.present?
+    if follow_list.present?
       favo_hash = Record.where(user_id: follow_list).group(:user_id).maximum(:created_at)
       f_ids = favo_hash.sort_by{ |k, v| v }.reverse.to_h.keys
       @pagy_fav, @favos = pagy(User.where(id: f_ids).order("field(id, #{f_ids.join(',')})"), page_param: :page_fav, params: { active_tab: 'favs' })
