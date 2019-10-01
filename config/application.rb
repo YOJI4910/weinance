@@ -22,5 +22,8 @@ module AppName
         request_specs: false
       )
     end
+
+    # coffee script排除に際して記述
+    config.generators.javascript_engine = :js
   end
 end
