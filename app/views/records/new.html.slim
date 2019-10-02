@@ -2,7 +2,7 @@ section.record
   = form_with model: @record, class:'box', local: true do |f|
     h1 Record Now!
 
-    = f.number_field :weight, step: 0.1, placeholder: 'Weight'
+    = f.number_field :weight, step: 0.1, placeholder: 'Weight', id: 'record_weight'
 
-    = f.submit 'Record!!'
+    = f.submit 'Record!!', id: "create_record"
 

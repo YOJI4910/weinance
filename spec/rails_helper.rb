@@ -36,4 +36,7 @@ RSpec.configure do |config|
     driven_by :selenium_remote
     host! "http://#{Capybara.server_host}:#{Capybara.server_port}"
   end
+
+  # travelメソッド使用のため
+  config.include ActiveSupport::Testing::TimeHelpers
 end
