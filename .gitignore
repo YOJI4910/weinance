@@ -25,6 +25,4 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
-ib_logfile0
-ibdata1
-ibtmp1
+/mysql/
