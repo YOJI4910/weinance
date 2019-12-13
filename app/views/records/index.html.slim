@@ -1,1 +1,86 @@
-h1 records index
+section#mv
+  .inner
+
+section#users
+  .inner
+    .users-search
+      / 検索ボックス
+    .users-body
+      ul.nav.nav-tabs
+        li.nav-item
+          a href="#all-content" class="nav-link #{ 'active' unless params[:active_tab] == 'favs' }" data-toggle="tab" All
+        li.nav-item
+          a href="#fav-content" class="nav-link #{ 'active' if params[:active_tab] == 'favs' }" data-toggle="tab" Favorites
+
+      .tab-content
+        div id="all-content" class="tab-pane #{ 'active' unless params[:active_tab] == 'favs' }"
+          table.users-table
+            thead.users-table-head
+              tr
+                th.follow-col 
+                th Name
+                th Last Weight
+                th 1month Chg%
+                th.bmi-col BMI
+                th.date-col Date
+            
+            tbody.users-table-body
+              - @records.each do |record|
+                - if record.present?
+                  tr id="user-#{record.id}"
+                    td id="follow-btn-#{record.user.id}"
+                      = render partial: 'follow', locals: { user: record.user }
+                    td
+                      = link_to record.user, class:"table-usernames" do
+                        = record.user.image.thumb25.url.present? ? image_tag(record.user.image.thumb25.url, class:'table-userimage') : image_tag("/assets/default_top_image.png",size:"25x25")
+                        p.table-username
+                          = record.user.name
+                    td= "#{record.user.records.order(:created_at).last.weight.round(1)} kg"
+                    - if change(record.user).round(2) >= 0
+                      td.pluscolor= sprintf("%+d%%", change(record.user).round(2))
+                    - else
+                      td.minuscolor= sprintf("%d%%", change(record.user).round(2))
+                    td= bmi(record.user)
+                    td= record.user.records.order(:created_at).last.created_at.strftime("%Y/%m/%d")
+          .d-flex.justify-content-center.mt-3
+            == pagy_bootstrap_nav(@pagy_all) 
+
+        div id="fav-content" class="tab-pane #{ 'active' if params[:active_tab] == 'favs' }"
+          - if current_user.present?
+            table.users-table
+              thead.users-table-head
+                tr
+                  th.follow-col 
+                  th Name
+                  th Last Weight
+                  th 1month Chg%
+                  th.bmi-col BMI
+                  th.date-col Date
+              
+              tbody.users-table-body
+                - if @favos.present?
+                  - @favos.each do |record|
+                    - if record.user.records.present? && current_user.following?(record.user)
+                      tr id="user-#{record.user.id}"
+                        td id="follow-btn-#{record.user.id}"
+                          = render partial: 'follow', locals: { user: record.user }
+                        td
+                          = link_to record.user, class:"table-usernames" do
+                            = record.user.image.thumb25.url.present? ? image_tag(record.user.image.thumb25.url, class:'table-userimage') : image_tag("/assets/default_top_image.png",size:"25x25")
+                            p.table-username
+                              = record.user.name
+                        td= "#{record.user.records.order(:created_at).last.weight.round(1)} kg"
+                        - if change(record.user).round(2) >= 0
+                          td.pluscolor= sprintf("%+d%%", change(record.user).round(2))
+                        - else
+                          td.minuscolor= sprintf("%d%%", change(record.user).round(2))
+                        td= bmi(record.user)
+                        td= record.user.records.order(:created_at).last.created_at.strftime("%Y/%m/%d")
+            .d-flex.justify-content-center.mt-3
+              == pagy_bootstrap_nav(@pagy_fav) if @pagy_fav.present?
+          - else
+            p.logout-tab-content ログインすると表示されます。 
+
+  - if current_user
+    .record-btn 
+      = link_to "+", new_record_path, id:'record_submit'
