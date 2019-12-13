@@ -11,9 +11,9 @@ class RecordsController < ApplicationController
     # current_userのfollowingリスト
     follow_list = current_user.active_relationships.pluck(:follower_id) if current_user.present?
     if follow_list.present?
-      favo_hash = Record.where(user_id: follow_list).group(:user_id).maximum(:created_at)
-      records = Record.where(user_id: favo_hash.keys, created_at: favo_hash.values).order(created_at: "DESC")
-      @pagy_fav, @favos = pagy(records, page_param: :page_fav, params: { active_tab: 'favs' })
+      fav_hash = Record.where(user_id: follow_list).group(:user_id).maximum(:created_at)
+      records = Record.where(user_id: fav_hash.keys, created_at: fav_hash.values).order(created_at: "DESC")
+      @pagy_fav, @fav_records = pagy(records, page_param: :page_fav, params: { active_tab: 'favs' })
     end
   end
 
