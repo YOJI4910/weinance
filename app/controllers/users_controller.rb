@@ -1,28 +1,7 @@
 class UsersController < ApplicationController  
-  include Pagy::Backend
   before_action :login_required, only: [:edit, :update, :destroy]
 
   def index
-    # recordテーブルから重複を省く{user_id => latest_record_created_at}
-    user_hash = Record.group(:user_id).maximum(:created_at)
-    records = Record.where(user_id: user_hash.keys, created_at: user_hash.values).order(created_at: "DESC")
-    @pagy_all, @records = pagy(records, page_param: :page_all, params: { active_tab: 'all' })
-
-    # 順のリスト[[user_id, created_at], [k, v], [k, v], ...] vの値で降順
-    # ids = user_hash.sort_by{ |k, v| v }.reverse.to_h.keys
-    # @pagy_all, @users = pagy(User.where(id: ids).order("field(id, #{ids.join(',')})"), page_param: :page_all, params: { active_tab: 'all' })
-    # users = User.joins(:records).includes(:records).merge(Record.where().order(created_at: "DESC"))
-
-    # ======================favo用
-    # current_userのfollowingリスト
-    follow_list = current_user.active_relationships.pluck(:follower_id) if current_user.present?
-    if follow_list.present?
-      favo_hash = Record.where(user_id: follow_list).group(:user_id).maximum(:created_at)
-      records = Record.where(user_id: favo_hash.keys, created_at: favo_hash.values).order(created_at: "DESC")
-      @pagy_fav, @favos = pagy(records, page_param: :page_fav, params: { active_tab: 'favs' })
-      # f_ids = favo_hash.sort_by{ |k, v| v }.reverse.to_h.keys
-      # @pagy_fav, @favos = pagy(User.where(id: f_ids).order("field(id, #{f_ids.join(',')})"), page_param: :page_fav, params: { active_tab: 'favs' })
-    end
   end
 
   def new
