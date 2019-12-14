@@ -7,10 +7,6 @@ class RecordsController < ApplicationController
     user_ids = Record.all.pluck(:user_id)
     records = get_ordered_records(user_ids)
     @pagy_all, @records = pagy(records, page_param: :page_all, params: { active_tab: 'all' })
-    # user_hash = Record.group(:user_id).maximum(:created_at)
-    # records = Record.where(user_id: user_hash.keys, created_at: user_hash.values).order(created_at: "DESC")
-    # @pagy_all, @records = pagy(records, page_param: :page_all, params: { active_tab: 'all' })
-
     # current_userのfollowingリスト
     follow_ids = current_user.active_relationships.pluck(:follower_id) if current_user.present?
     if follow_ids.present?
