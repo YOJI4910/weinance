@@ -22,19 +22,19 @@ section#show.show
   
     dl.show-list
       dt.show-dt Last Weight
-      dd.show-dd= lastest_weight(@user)
+      dd.show-dd= @user.lastest_weight
 
       dt.show-dt 1month Change
-      dd.show-dd= change(@user).round(1)
+      dd.show-dd= @user.weight_change_rate
 
       dt.show-dt 1month Max
-      dd.show-dd= max_weight(@user)
+      dd.show-dd= @user.max_weight
 
       dt.show-dt 1month min
-      dd.show-dd= min_weight(@user)
+      dd.show-dd= @user.min_weight
 
       dt.show-dt BMI
-      dd.show-dd= bmi(@user).round(1)
+      dd.show-dd= @user.bmi
 
     canvas#myChart
 

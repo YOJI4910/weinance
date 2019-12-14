@@ -14,22 +14,9 @@ section#users
 
       .tab-content
         div id="all-content" class="tab-pane #{ 'active' unless params[:active_tab] == 'favs' }"
-          / table.users-table
-          /   = render 'table_head'
-          /   tbody.users-table-body
-          /     = render partial: 'record_table', collection: @records, as: 'record'
-          / .d-flex.justify-content-center.mt-3
-          /   == pagy_bootstrap_nav(@pagy_all) 
           = render partial: 'record_table', locals: { records: @records, pagy_var: @pagy_all }
-
         div id="fav-content" class="tab-pane #{ 'active' if params[:active_tab] == 'favs' }"
-          - if current_user.present? && @fav_records.present?
-            / table.users-table
-            /   = render 'table_head'
-            /   tbody.users-table-body
-            /     = render partial: 'record_table', collection: @fav_records, as: 'record'
-            / .d-flex.justify-content-center.mt-3
-            /   == pagy_bootstrap_nav(@pagy_fav) if @pagy_fav.present?
+          - if current_user.present?
             = render partial: 'record_table', locals: { records: @fav_records, pagy_var: @pagy_fav }
           - else
             p.logout-tab-content ログインすると表示されます。 

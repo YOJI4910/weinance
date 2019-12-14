@@ -74,15 +74,15 @@ gem 'slim-rails'
 gem 'html2slim'
 # bootstrap導入doc
 gem 'bootstrap'
-#password_digest用
+# password_digest用
 gem 'bcrypt'
 # chart.js
 gem 'chart-js-rails'
 # ユーザー画像の実装
 gem 'carrierwave'
-#ページネーション
+# ページネーション
 gem 'pagy'
-#font-awesome
+# font-awesome
 gem 'font-awesome-sass', '~> 5.9.0'
 # jquery
 gem "jquery-rails"
