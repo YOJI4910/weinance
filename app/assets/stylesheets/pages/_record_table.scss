@@ -1,0 +1,52 @@
+.users-table {
+  th {
+    text-align: center;
+  }
+
+  .follow-col {
+    width: 4rem;
+  }
+
+  .bmi-col {
+    width: 80px;
+  }
+
+  .date-col {
+    width: 160px;
+  }
+}
+
+.users-table-body {
+  td {
+    text-align: center;
+    vertical-align: middle;
+    height: 50px;
+
+    .follow-btn {
+      font-size: 2rem;
+    }
+    .table-userimage {
+      object-fit: cover;
+      border-radius: 50%;
+    }
+
+    .table-usernames {
+      display: flex;
+      align-items: center;
+
+      .table-username {
+        margin-left: 5px;
+      }
+    }
+  }
+}
+
+.pluscolor {
+  color: $plus-color;
+  font-weight: bold;
+}
+
+.minuscolor {
+  color: $minus-color;
+  font-weight: bold;
+}
