@@ -1,7 +1,7 @@
 #mv {
   height: 400px;
   max-height: 600px;
-  background: rgb(26, 26, 26) url('mv1.svg') no-repeat center center/contain;
+  background: rgb(26, 26, 26) url("mv1.svg") no-repeat center center/contain;
   margin-top: 0;
 }
 
@@ -21,69 +21,15 @@
     .users-body {
       padding-top: 10px;
 
-        .logout-tab-content {
-          padding: 265px 0;
-          text-align: center;
-          font-size: 3rem;
-        }
-      }
-      
-      .users-table-head {
-        th {
-          text-align: center;
-        }
-        .bmi-col {
-          width: 80px;
-        }
-
-        .date-col {
-          width: 160px;
-        }
-
-        .follow-col {
-          width: 4rem;
-        }
+      .nav-item {
+        width: 10rem;
       }
 
-      &-head {
-        display: flex;
-        border-top: 1px solid $gray-border;
-        border-bottom: 1px solid $gray-border;
-      }
-
-      .users-table-body {
-        td {
-          text-align: center;
-          vertical-align: middle;
-          height: 50px;
-
-          .follow-btn {
-            font-size: 2rem;
-          }
-          .table-userimage {
-            object-fit: cover;
-            border-radius: 50%;
-          }
-
-          .table-usernames {
-            display: flex;
-            align-items: center;
-
-            .table-username {
-              margin-left: 5px;
-            }
-          }
-        }
+      .logout-tab-content {
+        padding: 265px 0;
+        text-align: center;
+        font-size: 3rem;
       }
     }
-}
-
-.pluscolor {
-  color: $plus-color;
-  font-weight: bold;
-}
-
-.minuscolor {
-  color: $minus-color;
-  font-weight: bold;
+  }
 }

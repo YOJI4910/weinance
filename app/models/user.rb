@@ -42,4 +42,50 @@ class User < ApplicationRecord
   def following?(other_user)
     followings.include?(other_user)
   end
+
+  # 過去30日の最小体重を返す
+  def min_weight
+    self.records.where('created_at >= ?', 30.days.ago).
+         pluck('weight').
+         min.
+         round(Constants::NUM_OF_DECIMAL_IN_WEIGHT)
+  end
+
+  # 過去30日の最高体重を返す
+  def max_weight
+    self.records.
+         where('created_at >= ?', 30.days.ago).
+         pluck('weight').
+         max.
+         round(Constants::NUM_OF_DECIMAL_IN_WEIGHT)
+  end
+
+  # 最後に記録した体重を返す
+  def lastest_weight
+    self.records.
+         order(created_at: :DESC).
+         first.
+         weight.
+         round(Constants::NUM_OF_DECIMAL_IN_WEIGHT)
+  end
+
+  def weight_change_rate
+    last_datas = self.records.where(created_at: Date.today.last_month.all_month)
+    last_avg = last_datas.pluck('weight').sum / last_datas.count
+    ((( self.lastest_weight - last_avg ) / last_avg )*100).
+      round(Constants::NUM_OF_DECIMAL_IN_CHANGE_RATE)
+  rescue ZeroDivisionError
+    0
+  end
+
+  def bmi
+    if self.records.present?
+      # 身長 cm -> m
+      height_m = self.height / 100
+      (self.lastest_weight / (height_m * height_m) ).
+        round(Constants::NUM_OF_DECIMAL_IN_HEIGHT)
+    else
+      "-"
+    end
+  end
 end

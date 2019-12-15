@@ -1,0 +1,31 @@
+table.users-table
+  thead.users-table-head
+  tr
+    th.follow-col 
+    th Name
+    th Last Weight
+    th 1month Chg%
+    th.bmi-col BMI
+    th.date-col Date
+  tbody.users-table-body
+    - if records.present?
+      - records.each do |record|
+        - user = record.user
+        tr id="record-#{record.id}"
+          td id="follow-btn-#{user.id}"
+            = render partial: 'follow', locals: { user: user }
+          td
+            = link_to user, class:"table-usernames" do
+              = user.image.thumb25.url.present? ? image_tag(user.image.thumb25.url, class:'table-userimage') :\
+                                                  image_tag("/assets/default_top_image.png",size:"25x25")
+              p.table-username
+                = user.name
+          td= "#{user.lastest_weight} kg"
+          - if user.weight_change_rate >= 0
+            td.pluscolor= "+ #{user.weight_change_rate} %"
+          - else
+            td.minuscolor= "− #{user.weight_change_rate.abs} %"
+          td= user.bmi
+          td= record.created_at.strftime("%Y/%m/%d")
+.d-flex.justify-content-center.mt-3
+  == pagy_bootstrap_nav(pagy_var) if pagy_var.present?

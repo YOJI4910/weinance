@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
-  root to: 'users#index'
+  root to: 'records#index'
   resources :users do
     resource :relationships, only: [:create, :destroy]
     # resorcesにさらにルートを追加. memberは:idのあとに続くという意味

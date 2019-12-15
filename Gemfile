@@ -24,8 +24,6 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
-# Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
 
 # Use ActiveStorage variant
 gem 'mini_magick'
@@ -48,6 +46,7 @@ group :development, :test do
   gem 'pry-rails'
   gem 'pry-byebug'
   gem 'rspec-rails'
+  gem 'rubocop-airbnb'
 end
 
 group :development do
@@ -75,15 +74,15 @@ gem 'slim-rails'
 gem 'html2slim'
 # bootstrap導入doc
 gem 'bootstrap'
-#password_digest用
+# password_digest用
 gem 'bcrypt'
 # chart.js
 gem 'chart-js-rails'
 # ユーザー画像の実装
 gem 'carrierwave'
-#ページネーション
+# ページネーション
 gem 'pagy'
-#font-awesome
+# font-awesome
 gem 'font-awesome-sass', '~> 5.9.0'
 # jquery
 gem "jquery-rails"

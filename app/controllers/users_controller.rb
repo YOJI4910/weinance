@@ -1,28 +1,7 @@
 class UsersController < ApplicationController  
-  include Pagy::Backend
   before_action :login_required, only: [:edit, :update, :destroy]
 
   def index
-    # recordテーブルから重複を省く{user_id => latest_record_created_at}
-    user_hash = Record.group(:user_id).maximum(:created_at)
-    records = Record.where(user_id: user_hash.keys, created_at: user_hash.values).order(created_at: "DESC")
-    @pagy_all, @records = pagy(records, page_param: :page_all, params: { active_tab: 'all' })
-
-    # 順のリスト[[user_id, created_at], [k, v], [k, v], ...] vの値で降順
-    # ids = user_hash.sort_by{ |k, v| v }.reverse.to_h.keys
-    # @pagy_all, @users = pagy(User.where(id: ids).order("field(id, #{ids.join(',')})"), page_param: :page_all, params: { active_tab: 'all' })
-    # users = User.joins(:records).includes(:records).merge(Record.where().order(created_at: "DESC"))
-
-    # ======================favo用
-    # current_userのfollowingリスト
-    follow_list = current_user.active_relationships.pluck(:follower_id) if current_user.present?
-    if follow_list.present?
-      favo_hash = Record.where(user_id: follow_list).group(:user_id).maximum(:created_at)
-      records = Record.where(user_id: favo_hash.keys, created_at: favo_hash.values).order(created_at: "DESC")
-      @pagy_fav, @favos = pagy(records, page_param: :page_fav, params: { active_tab: 'favs' })
-      # f_ids = favo_hash.sort_by{ |k, v| v }.reverse.to_h.keys
-      # @pagy_fav, @favos = pagy(User.where(id: f_ids).order("field(id, #{f_ids.join(',')})"), page_param: :page_fav, params: { active_tab: 'favs' })
-    end
   end
 
   def new
@@ -31,7 +10,6 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    
     if @user.save
       # 登録と同時にログイン
       session[:user_id] = @user.id
@@ -43,17 +21,12 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    # 1ヶ月分のrecordのcreated_atをリストで取得
-    # record_last30 = @user.records.where('created_at >= ?', 1.month.ago)
-    # 同じ記録日のレコードは平均値の１つのデータとする
-    # "10/04" : [10,20],
-    record_last30 = @user.records.where('created_at >= ?', 1.month.ago).order(:created_at).group_by{ |p| p.created_at.strftime('%m/%d') }.map {|k,v| [k, v.map(&:weight)]}.to_h 
-    # 複数値をもつ配列を平均する
-    # "10/04" : 15
-    average_last30 = record_last30.map { |key, value| [key, value.sum/value.length]}.to_h
-
-    @labels = average_last30.keys
-    @datas = average_last30.values
+    record_last30 = @user.records.where('created_at >= ?', 1.month.ago). # 1ヶ月分のrecordを取得
+                          order(:created_at).
+                          group_by{ |p| p.created_at.strftime('%m/%d') }. # 同日複数レコードをくくる（ハッシュ） "10/04" => [some Records]
+                          to_h {|k,v| [k, v.map(&:weight).sum / v.count]}               # レコードから体重を抽出  "10/04" => 体重の平均値
+    @labels = record_last30.keys
+    @datas = record_last30.values
   end
 
   def edit
@@ -77,7 +50,6 @@ class UsersController < ApplicationController
   end
 
   private
-
   def user_params
     params.require(:user).permit(:name, :email, :height, :password, :password_confirmation, :image)
   end
