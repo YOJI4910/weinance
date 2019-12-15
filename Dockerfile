@@ -10,6 +10,7 @@ RUN apt-get update -qq
 RUN apt-get install -y build-essential
 RUN apt-get install -y libpq-dev
 RUN apt-get install -y nodejs
+RUN apt-get install -y vim
 
 # 作業ディレクトリの作成、設定
 RUN mkdir /app_name
