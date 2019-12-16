@@ -1,31 +1,36 @@
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-           
-  before_save { self.email = email.downcase }
+
 
   validates :name, presence: true, length: { maximum: 50 }
   validates :height, presence: true
-  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-  validates :email, presence: true, length: { maximum: 255 },  format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false }
-  validates :password, presence: true, length: { minimum: 6 }
+  # before_save { self.email = email.downcase }
+  # VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+  # validates :email, presence: true, length: { maximum: 255 },  format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false }
+  # validates :password, presence: true, length: { minimum: 6 }
 
   has_many :records
 
   # ========================================================フォローしているユーザー視点
   # 中間テーブルと関係. 外部キーはfollowing_id
-  has_many :active_relationships, class_name: "Relationship",
-                                  foreign_key: :following_id, dependent: :destroy
+  has_many(
+    :active_relationships,
+    class_name: "Relationship",
+    foreign_key: :following_id,
+    dependent: :destroy
+  )
   # followerテーブルとの関係. ただしacitve_relationshipsテーブルのfollowerカラムを介して
   has_many :followings, through: :active_relationships, source: :follower
   # =====================================================================================
-
   # ======================================================フォローされているユーザー視点
   # 中間テーブルと関係. 外部キーはfollower_id
-  has_many :passive_relationships, class_name: "Relationship",
-                                  foreign_key: :follower_id, dependent: :destroy
+  has_many(
+    :passive_relationships,
+    class_name: "Relationship",
+    foreign_key: :follower_id,
+    dependent: :destroy
+  )
   # followerテーブルとの関係. ただしacitve_relationshipsテーブルのfollowerカラムを介して
   has_many :followers, through: :passive_relationships, source: :following
   # ====================================================================================
