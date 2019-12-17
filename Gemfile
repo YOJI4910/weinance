@@ -22,6 +22,7 @@ gem 'pagy'
 gem 'font-awesome-sass', '~> 5.9.0'
 gem "jquery-rails"
 gem 'devise'
+gem 'devise-i18n'
 gem "omniauth"
 gem 'omniauth-twitter'
 gem 'omniauth-facebook'
