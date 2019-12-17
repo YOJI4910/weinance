@@ -21,8 +21,12 @@ gem 'carrierwave'
 gem 'pagy'
 gem 'font-awesome-sass', '~> 5.9.0'
 gem "jquery-rails"
-gem 'dotenv-rails'
 gem 'devise'
+gem "omniauth"
+gem 'omniauth-twitter'
+gem 'omniauth-facebook'
+gem 'omniauth-google-oauth2'
+
 
 group :development, :test do
   gem 'minitest', '>= 5.12.0'
@@ -31,6 +35,7 @@ group :development, :test do
   gem 'pry-byebug'
   gem 'rspec-rails'
   gem 'rubocop-airbnb'
+  gem 'dotenv-rails'
 end
 
 group :development do
