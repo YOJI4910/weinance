@@ -22,7 +22,7 @@ html
               = link_to "About", about_path
             - if current_user
               li.header-item
-                = link_to 'LogOut', logout_path, method: :delete
+                = link_to 'LogOut', destroy_user_session_path, method: :delete
               li.header-item
                 - if current_user.image.thumb40.url.present?
                     = link_to "#{current_user.image.thumb40.url} #{current_user.name}", current_user
@@ -35,16 +35,13 @@ html
               li.header-item
                 = link_to "LogIn", login_path
               li.header-item._register
-                = link_to "Register", new_user_path
+                = link_to "Register", new_user_registration_path
     
     //header分の空スペース
     .header-space
     
-    .flash
-      - if flash.present?
-        - flash.each do |type, message|
-          div class="alert alert-#{type}"
-            = message
+    - flash.each do |key, value|
+      = content_tag(:div, value, class: "#{key}") 
 
     = yield
     = render 'layouts/footer'

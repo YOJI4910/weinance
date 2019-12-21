@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_16_093100) do
+ActiveRecord::Schema.define(version: 2019_12_21_090240) do
 
   create_table "records", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.float "weight"
@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 2019_12_16_093100) do
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
-    t.float "height", null: false
+    t.float "height"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "image"

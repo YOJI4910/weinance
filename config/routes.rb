@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   root to: 'records#index'
   get '/privacy', to: 'static_pages#privacy'
 
-  resources :users do
+  resources :users, only: [:show] do
     resource :relationships, only: [:create, :destroy]
     # resorcesにさらにルートを追加. memberは:idのあとに続くという意味
     get :follows, on: :member

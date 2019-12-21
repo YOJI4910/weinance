@@ -75,28 +75,40 @@ class User < ApplicationRecord
 
   # 過去30日の最小体重を返す
   def min_weight
-    self.records.where('created_at >= ?', 30.days.ago).
-         pluck('weight').
-         min.
-         round(Constants::NUM_OF_DECIMAL_IN_WEIGHT)
+    if self.has_record?
+      self.records.where('created_at >= ?', 30.days.ago).
+          pluck('weight').
+          min.
+          round(Constants::NUM_OF_DECIMAL_IN_WEIGHT)
+    else
+      "―"
+    end
   end
 
   # 過去30日の最高体重を返す
   def max_weight
-    self.records.
-         where('created_at >= ?', 30.days.ago).
-         pluck('weight').
-         max.
-         round(Constants::NUM_OF_DECIMAL_IN_WEIGHT)
+    if self.has_record?
+      self.records.
+          where('created_at >= ?', 30.days.ago).
+          pluck('weight').
+          max.
+          round(Constants::NUM_OF_DECIMAL_IN_WEIGHT)
+    else
+      "―"
+    end
   end
 
   # 最後に記録した体重を返す
   def lastest_weight
-    self.records.
-         order(created_at: :DESC).
-         first.
-         weight.
-         round(Constants::NUM_OF_DECIMAL_IN_WEIGHT)
+    if self.has_record?
+      self.records.
+          order(created_at: :DESC).
+          first.
+          weight.
+          round(Constants::NUM_OF_DECIMAL_IN_WEIGHT)
+    else
+      "―"
+    end
   end
 
   def weight_change_rate
@@ -115,7 +127,11 @@ class User < ApplicationRecord
       (self.lastest_weight / (height_m * height_m) ).
         round(Constants::NUM_OF_DECIMAL_IN_HEIGHT)
     else
-      "-"
+      "―"
     end
+  end
+
+  def has_record?
+    !!self.records.first
   end
 end
