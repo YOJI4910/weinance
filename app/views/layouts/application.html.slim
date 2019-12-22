@@ -28,7 +28,7 @@ html
                     = link_to "#{current_user.image.thumb40.url} #{current_user.name}", current_user
                 - else
                     = link_to current_user do
-                      = image_tag("/assets/default_top_image.png", size: '40x40', class:"header-user-image")
+                      = image_tag("/assets/no_user.png", size: '40x40', class:"header-user-image")
                       p.header-user
                         = current_user.name
             - else

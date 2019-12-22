@@ -27,6 +27,12 @@ ja:
         updated_at: 更新日
     models:
       user: ユーザ
+    errors:
+      models:
+        user:
+          attributes:
+            current_password:
+              blank: "が空になっています"
   users:
     confirmations:
       confirmed: メールアドレスが確認できました。

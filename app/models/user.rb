@@ -39,27 +39,6 @@ class User < ApplicationRecord
 
   mount_uploader :image, ImageUploader
 
-  # omniauthのコールバック時に呼ばれるメソッド
-  def self.from_omniauth(auth)
-    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-      user.email = auth.info.email
-      user.password = Devise.friendly_token[0,20]
-    end
-  end
-
-  def self.find_for_oauth(auth)
-    user = User.where(uid: auth.uid, provider: auth.provider).first
-    unless user
-      user = User.create(
-        uid:      auth.uid,
-        provider: auth.provider,
-        email:    auth.info.email,
-        password: Devise.friendly_token[0, 20]
-      )
-    end
-    user
-  end
-
   def follow(other_user)
     active_relationships.create(follower_id: other_user.id)
   end
@@ -133,5 +112,25 @@ class User < ApplicationRecord
 
   def has_record?
     !!self.records.first
+  end
+
+  # omniauthのコールバック時に呼ばれるメソッド
+  def self.find_for_oauth(auth)
+    user = User.where(uid: auth.uid, provider: auth.provider).first
+    unless user
+      user = User.create(
+        name: auth.info.name,
+        email: User.dumy_email(auth),
+        uid: auth.uid,
+        provider: auth.provider,
+        password: Devise.friendly_token[0, 20]
+      )
+    end
+    user
+  end
+
+  private
+  def self.dumy_email(auth)
+    "#{auth.uid}-#{auth.provider}@example.com"
   end
 end

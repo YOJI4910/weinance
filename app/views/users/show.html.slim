@@ -4,7 +4,7 @@ section#show.show
       - if @user.image?
         = image_tag @user.image.thumb.url, class:"top-image"
       -else
-        = image_tag "/assets/default_top_image.png", class: "top-image", size: '100x100'
+        = image_tag "/assets/no_user.png", class: "top-image", size: '100x100'
       h1.show-name= @user.name
 
     .user-info
