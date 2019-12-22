@@ -4,7 +4,7 @@ section#show.show
       - if @user.image?
         = image_tag @user.image.thumb.url, class:"top-image"
       -else
-        = image_tag "/assets/default_top_image.png", class: "top-image", size: '100x100'
+        = image_tag "/assets/no_user.png", class: "top-image", size: '100x100'
       h1.show-name= @user.name
 
     .user-info
@@ -17,7 +17,7 @@ section#show.show
 
       - if current_user == @user
         .user-manage
-          = link_to '編集', edit_user_path(@user), class:'btn btn-danger manage-item'
+          = link_to '編集', edit_user_registration_path(@user), class:'btn btn-danger manage-item'
           = link_to '削除', @user, method: :delete, class:'btn btn-danger manage-item'
   
     dl.show-list

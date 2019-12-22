@@ -1,34 +1,43 @@
 class User < ApplicationRecord
-  has_secure_password
-  
-  before_save { self.email = email.downcase }
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :validatable,
+         :omniauthable, omniauth_providers: %i[facebook twitter google_oauth2]
 
-  validates :name, presence: true, length: { maximum: 50 }
-  validates :height, presence: true
-  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-  validates :email, presence: true, length: { maximum: 255 },  format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false }
-  validates :password, presence: true, length: { minimum: 6 }
+
+  # validates :name, presence: true, length: { maximum: 50 }
+  # validates :height, presence: true
+
+  # before_save { self.email = email.downcase }
+  # VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+  # validates :email, presence: true, length: { maximum: 255 },  format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false }
+  # validates :password, presence: true, length: { minimum: 6 }
 
   has_many :records
 
   # ========================================================フォローしているユーザー視点
   # 中間テーブルと関係. 外部キーはfollowing_id
-  has_many :active_relationships, class_name: "Relationship",
-                                  foreign_key: :following_id, dependent: :destroy
+  has_many(
+    :active_relationships,
+    class_name: "Relationship",
+    foreign_key: :following_id,
+    dependent: :destroy
+  )
   # followerテーブルとの関係. ただしacitve_relationshipsテーブルのfollowerカラムを介して
   has_many :followings, through: :active_relationships, source: :follower
   # =====================================================================================
-
   # ======================================================フォローされているユーザー視点
   # 中間テーブルと関係. 外部キーはfollower_id
-  has_many :passive_relationships, class_name: "Relationship",
-                                  foreign_key: :follower_id, dependent: :destroy
+  has_many(
+    :passive_relationships,
+    class_name: "Relationship",
+    foreign_key: :follower_id,
+    dependent: :destroy
+  )
   # followerテーブルとの関係. ただしacitve_relationshipsテーブルのfollowerカラムを介して
   has_many :followers, through: :passive_relationships, source: :following
   # ====================================================================================
 
   mount_uploader :image, ImageUploader
-
 
   def follow(other_user)
     active_relationships.create(follower_id: other_user.id)
@@ -45,28 +54,40 @@ class User < ApplicationRecord
 
   # 過去30日の最小体重を返す
   def min_weight
-    self.records.where('created_at >= ?', 30.days.ago).
-         pluck('weight').
-         min.
-         round(Constants::NUM_OF_DECIMAL_IN_WEIGHT)
+    if self.has_record?
+      self.records.where('created_at >= ?', 30.days.ago).
+          pluck('weight').
+          min.
+          round(Constants::NUM_OF_DECIMAL_IN_WEIGHT)
+    else
+      "―"
+    end
   end
 
   # 過去30日の最高体重を返す
   def max_weight
-    self.records.
-         where('created_at >= ?', 30.days.ago).
-         pluck('weight').
-         max.
-         round(Constants::NUM_OF_DECIMAL_IN_WEIGHT)
+    if self.has_record?
+      self.records.
+          where('created_at >= ?', 30.days.ago).
+          pluck('weight').
+          max.
+          round(Constants::NUM_OF_DECIMAL_IN_WEIGHT)
+    else
+      "―"
+    end
   end
 
   # 最後に記録した体重を返す
   def lastest_weight
-    self.records.
-         order(created_at: :DESC).
-         first.
-         weight.
-         round(Constants::NUM_OF_DECIMAL_IN_WEIGHT)
+    if self.has_record?
+      self.records.
+          order(created_at: :DESC).
+          first.
+          weight.
+          round(Constants::NUM_OF_DECIMAL_IN_WEIGHT)
+    else
+      "―"
+    end
   end
 
   def weight_change_rate
@@ -85,7 +106,31 @@ class User < ApplicationRecord
       (self.lastest_weight / (height_m * height_m) ).
         round(Constants::NUM_OF_DECIMAL_IN_HEIGHT)
     else
-      "-"
+      "―"
     end
+  end
+
+  def has_record?
+    !!self.records.first
+  end
+
+  # omniauthのコールバック時に呼ばれるメソッド
+  def self.find_for_oauth(auth)
+    user = User.where(uid: auth.uid, provider: auth.provider).first
+    unless user
+      user = User.create(
+        name: auth.info.name,
+        email: User.dumy_email(auth),
+        uid: auth.uid,
+        provider: auth.provider,
+        password: Devise.friendly_token[0, 20]
+      )
+    end
+    user
+  end
+
+  private
+  def self.dumy_email(auth)
+    "#{auth.uid}-#{auth.provider}@example.com"
   end
 end

@@ -3,4 +3,7 @@ class StaticPagesController < ApplicationController
     @users = User.all
     @records = Record.all
   end
+
+  def privacy
+  end
 end

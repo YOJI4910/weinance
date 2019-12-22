@@ -1,10 +1,19 @@
 Rails.application.routes.draw do
-  get '/about', to: 'static_pages#about'
-  get '/login', to: 'sessions#new'
-  post '/login', to: 'sessions#create'
-  delete '/logout', to: 'sessions#destroy'
+  devise_for :users, controllers: {
+    registrations: 'users/registrations',
+    sessions: 'users/sessions',
+    omniauth_callbacks: 'users/omniauth_callbacks'
+  }
+
+  devise_scope :user do
+    get '/about', to: 'static_pages#about'
+    get '/login', to: 'users/sessions#new'
+  end
+
   root to: 'records#index'
-  resources :users do
+  get '/privacy', to: 'static_pages#privacy'
+
+  resources :users, only: [:show] do
     resource :relationships, only: [:create, :destroy]
     # resorcesにさらにルートを追加. memberは:idのあとに続くという意味
     get :follows, on: :member

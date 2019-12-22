@@ -17,7 +17,7 @@ table.users-table
           td
             = link_to user, class:"table-usernames" do
               = user.image.thumb25.url.present? ? image_tag(user.image.thumb25.url, class:'table-userimage') :\
-                                                  image_tag("/assets/default_top_image.png",size:"25x25")
+                                                  image_tag("/assets/no_user.png",size:"25x25")
               p.table-username
                 = user.name
           td= "#{user.lastest_weight} kg"

@@ -1,0 +1,99 @@
+.custom-sec {
+  padding: 50px 0;
+  .custom-wrapper{
+    display: flex;
+    justify-content: center;
+
+    .avatar-edit{
+      text-align: center;
+      padding-top: 50px;
+
+      .avatar-input-field{
+        margin-top: 20px;
+
+        label {
+          cursor: pointer;
+          border: 1px solid gray;
+          border-radius: 24px;
+          padding: 10px 14px;
+        }
+
+        input[type="file"] {
+          display: none;
+        }
+      }
+    }
+
+    .profile-edit{
+      margin-left: 30px;
+
+      h1 {
+        font-size: 3rem;
+      }
+
+      .input-field {
+        margin-top: 10px;
+        font-size: 1.4rem;
+        text-align: center;
+
+        .password-min-letters {
+          display: inline-block;
+          margin-left: 8px;
+          font-size: 1.2rem;
+        }
+
+        input[type="text"], input[type="email"], input[type="password"] {
+          border: 0;
+          background: none;
+          display: block;
+          margin: 0 auto;
+          text-align: center;
+          border: 2px solid #2980b9;
+          padding: 10px 10px;
+          width: 200px;
+          outline: none;
+          border-radius: 24px;
+          transition: 0.25s;
+        }
+  
+        input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focus {
+          width: 280px;
+          border-color: #55efc4;
+        }
+      }
+
+      .actions {
+        display: flex;
+        justify-content: center;
+        margin-top: 30px;
+
+        a, input[type="submit"] {
+          border: 0;
+          background: none;
+          display: block;
+          margin: 0 auto;
+          text-align: center;
+          border: 2px solid #55efc4;
+          padding: 12px 30px;
+          outline: none;
+          border-radius: 24px;
+          transition: 0.25s;
+          cursor: pointer;
+    
+          &:hover {
+            background: #55efc4;
+          }
+        }
+
+        a {
+          border: 2px solid #ecf0f1;
+          color: gray;
+
+          &:hover {
+            background: #ecf0f1;
+          }
+        }
+      }
+    }
+  }
+}
