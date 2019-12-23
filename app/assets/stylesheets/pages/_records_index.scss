@@ -1,0 +1,35 @@
+#mv {
+  height: 400px;
+  max-height: 600px;
+  background: rgb(26, 26, 26) url("mv1.svg") no-repeat center center/contain;
+  margin-top: 0;
+}
+
+.records-sec {
+  background: rgb(240, 240, 240);
+  padding-top: 20px;
+  padding-bottom: 20px;
+
+  .inner {
+    background: #fff;
+    padding-bottom: 20px;
+
+    .users-search {
+      text-align: center;
+    }
+
+    .records-body {
+      padding-top: 10px;
+
+      .nav-item {
+        width: 10rem;
+      }
+
+      .logout-tab-content {
+        padding: 265px 0;
+        text-align: center;
+        font-size: 3rem;
+      }
+    }
+  }
+}
