@@ -1,52 +1,80 @@
-.users-table {
+table.users-table {
+  text-align: left;
+  border-collapse: collapse;
+  width: 100%;
+
   th {
-    text-align: center;
+    color: rgb(132, 142, 156);
+    font-size: 1.3rem;
+    vertical-align: middle;
+    padding: 10px 0 10px 12px;
   }
 
   .follow-col {
-    width: 4rem;
+    width: 50px;
   }
 
-  .bmi-col {
-    width: 80px;
+  .weight-col {
+    width: 18%;
   }
 
-  .date-col {
-    width: 160px;
+  .change-col{
+    width: 18%;
+  }
+
+  .bmi-col{
+    width: 12%;
+  }
+
+  .date-col{
+    display: none;
+
+    @include mq(tab) {
+      display: table-cell;
+      width: 18%;
+    }
   }
 }
 
 .users-table-body {
-  td {
-    text-align: center;
-    vertical-align: middle;
-    height: 50px;
+  tr {
+    border-top: 1px solid rgb(240, 240, 240);
+    border-bottom: 1px solid rgb(240, 240, 240);
 
-    .follow-btn {
-      font-size: 2rem;
-    }
-    .table-userimage {
-      object-fit: cover;
-      border-radius: 50%;
-    }
+    td {
+      vertical-align: middle;
+      padding: 20px 0 20px 12px;
 
-    .table-usernames {
-      display: flex;
-      align-items: center;
-
-      .table-username {
-        margin-left: 5px;
+      .follow-btn {
+        font-size: 2rem;
       }
+      .table-userimage {
+        object-fit: cover;
+        border-radius: 50%;
+      }
+
+      .table-usernames {
+        display: flex;
+        align-items: center;
+
+        .table-username {
+          margin-left: 5px;
+        }
+      }
+    }
+
+    .follow-data{
+      text-align: center;
     }
   }
 }
 
 .pluscolor {
-  color: $plus-color;
+  color: $plus-change;
   font-weight: bold;
 }
 
 .minuscolor {
-  color: $minus-color;
+  color: $minus-change;
   font-weight: bold;
 }

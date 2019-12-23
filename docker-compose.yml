@@ -30,7 +30,9 @@ services:
     # webはdbに依存。 起動順がdb→chrome→webになる。
     depends_on:
       - db
-      - chrome
+    # binding.pry, rails cを使えるように
+    tty: true
+    stdin_open: true
 
   # Headless chrome用
   chrome:

@@ -2,9 +2,9 @@ table.users-table
   thead.users-table-head
   tr
     th.follow-col 
-    th Name
-    th Last Weight
-    th 1month Chg%
+    th.name-col Name
+    th.weight-col Last Weight
+    th.change-col 1mon. Chg
     th.bmi-col BMI
     th.date-col Date
   tbody.users-table-body
@@ -12,7 +12,7 @@ table.users-table
       - records.each do |record|
         - user = record.user
         tr id="record-#{record.id}"
-          td id="follow-btn-#{user.id}"
+          td id="follow-btn-#{user.id}" class="follow-data"
             = render partial: 'follow', locals: { user: user }
           td
             = link_to user, class:"table-usernames" do
@@ -26,6 +26,6 @@ table.users-table
           - else
             td.minuscolor= "− #{user.weight_change_rate.abs} %"
           td= user.bmi
-          td= record.created_at.strftime("%Y/%m/%d")
+          td.date-col= record.created_at.strftime("%Y/%m/%d")
 .d-flex.justify-content-center.mt-3
-  == pagy_bootstrap_nav(pagy_var) if pagy_var.present?
+  == pagy_bootstrap_nav(pagy_var) if records.present?

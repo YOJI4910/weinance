@@ -100,7 +100,7 @@ class User < ApplicationRecord
   end
 
   def bmi
-    if self.records.present?
+    if self.records.present? && self.height.present?
       # 身長 cm -> m
       height_m = self.height / 100
       (self.lastest_weight / (height_m * height_m) ).
