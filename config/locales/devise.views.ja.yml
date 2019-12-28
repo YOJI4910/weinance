@@ -33,6 +33,7 @@ ja:
           attributes:
             current_password:
               blank: "が空になっています"
+              invalid: "が違います"
   users:
     confirmations:
       confirmed: メールアドレスが確認できました。

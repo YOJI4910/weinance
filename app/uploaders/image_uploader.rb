@@ -3,11 +3,11 @@ class ImageUploader < CarrierWave::Uploader::Base
   # include CarrierWave::RMagick
 
   # minimagic使用のため
-    include CarrierWave::MiniMagick
+  include CarrierWave::MiniMagick
   
   # show-page用リサイズ
   version :thumb do
-    process resize_to_fit: [100,100]
+    process resize_to_fit: [150,150]
   end
   # navibar用リサイズ
   version :thumb40 do

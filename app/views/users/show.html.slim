@@ -1,40 +1,36 @@
-section#show.show
+section.show-sec
   .inner
     .show-head
-      - if @user.image?
-        = image_tag @user.image.thumb.url, class:"top-image"
-      -else
-        = image_tag "/assets/no_user.png", class: "top-image", size: '100x100'
-      h1.show-name= @user.name
-
+      .user-avatar
+        - if @user.image?
+          = image_tag @user.image.url, class:"show-avatar"
+        -else
+          = image_tag "/assets/no_user.png", class: "show-avatar"
+      .user-manage
+        h1= @user.name
+        - if current_user == @user
+          .user-menu
+            = link_to 'プロフィール編集', edit_user_registration_path(@user), class:'btn btn-secondary'
+            = link_to 'ログアウト', destroy_user_session_path, method: :delete, class:'btn btn-danger'
     .user-info
-      dl.user-dl
-        dt.user-dt 身長
-        dd.user-dd= "#{@user.height} cm"
-      dl.user-dl
-        dt.user-dt 登録日
-        dd.user-dd= @user.created_at.strftime("%Y年%m月%d日")
-
-      - if current_user == @user
-        .user-manage
-          = link_to '編集', edit_user_registration_path(@user), class:'btn btn-danger manage-item'
-          = link_to '削除', @user, method: :delete, class:'btn btn-danger manage-item'
-  
-    dl.show-list
-      dt.show-dt Last Weight
-      dd.show-dd= @user.lastest_weight
-
-      dt.show-dt 1month Change
-      dd.show-dd= @user.weight_change_rate
-
-      dt.show-dt 1month Max
-      dd.show-dd= @user.max_weight
-
-      dt.show-dt 1month min
-      dd.show-dd= @user.min_weight
-
-      dt.show-dt BMI
-      dd.show-dd= @user.bmi
+      .info-item
+        dt Height
+        dd= @user.display_height
+      .info-item
+        dt Latest
+        dd= @user.display_latest
+      .info-item
+        dt 1mo. Change
+        dd= @user.weight_change_rate
+      .info-item
+        dt 1mo. Hight
+        dd= @user.display_max
+      .info-item
+        dt 1mo. Low
+        dd= @user.display_min
+      .info-item
+        dt BMI
+        dd= @user.bmi
 
     canvas#myChart
 

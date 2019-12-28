@@ -1,72 +1,69 @@
-.show {
+.show-sec {
   padding-bottom: 40px;
   
-  &-head {
-    display: flex;
-    align-items: center;
-    padding-top: 20px;
-    .top-image {
-      margin-right: 20px;
-    }
-  }
+  .inner {
+    width: 80%;
 
-  &-name {
-    font-size: 5rem;
-    text-align-last: left;
-    padding-top: 20px;
-  }
+    .show-head {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding-top: 20px;
 
-  .user-info {
-    display: flex;
-    padding-top: 20px;
-    align-items: center;
+      .user-avatar {
+        .show-avatar {
+          object-fit: cover;
+          width: 200px;
+          height: 200px;
+          border-radius: 50%;
+        }
+      }
 
-    .user-dl {
-      text-align-last: left;
-      
-      &:first-of-type {
-        margin-right: 30px;
+      .user-manage{
+        text-align: left;
+        margin-left: 30px;
+        .user-menu {
+          margin-top: 10px;
+
+          a {
+            font-size: 1.4rem;
+            border-radius: 20px;
+
+            &:last-of-type {
+              margin-left: 5px;
+            }
+          }
+        }
       }
     }
-
-    .user-manage {
+  
+    .user-info {
       display: flex;
-      margin-left: 30px;
+      justify-content: center;
+      padding-top: 20px;
+      padding-bottom: 40px;      
 
-      .manage-item {
-        font-size: 1.4rem;
-        width: 60px;
-        height: 30px;
+      .info-item {
+        margin-left: 30px;
+        text-align: left;
 
-        &:first-of-type {
-          margin-right: 10px;
+        &:first-child {
+          margin-left: 0;
+        }
+
+        dt {
+          color: gray;
+        }
+
+        dd {
+          font-weight: bold;
         }
       }
     }
   }
+}
 
-  .show-list {
-    width: 50%;
-    min-width: 300px;
-    padding-top: 30px;
-    display: flex;
-    flex-wrap: wrap;
-    margin: 0 auto;
-
-    .show-dt {
-      width: 50%;
-      text-align: right;
-      margin-bottom: 20px;
-    }
-
-    .show-dd {
-      width: 50%;
-      text-align-last: right;
-    }
-  }
-
-  canvas {
-    max-width: 1000px;
-    margin: 0 auto;
-  }
+canvas {
+  max-width: 800px;
+  margin: 0 auto;
 }

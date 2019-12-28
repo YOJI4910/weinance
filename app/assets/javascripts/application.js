@@ -18,3 +18,22 @@
 //= require turbolinks
 //= require_tree .
 //= require Chart.min
+
+// アバター変更の際の画像プレビュー
+$(function() {
+  function readURL(input) {
+    if (input.files && input.files[0]) {
+    var reader = new FileReader();
+
+    reader.onload = function (e) {
+      $('#avatar-prev').attr('src', e.target.result);
+    }
+    reader.readAsDataURL(input.files[0]);
+    }
+  }
+  $("#avatar-edit-field").change(function(){
+    $('#avatar-prev').removeClass('hidden');
+    $('#avatar-present').remove();
+    readURL(this);
+  });
+});

@@ -9,28 +9,26 @@ html
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   body
-    header#header
+    header.header
       .inner
         nav
           h1.header-logo
             = link_to "Weinance", root_path
 
           ul.header-list
-            li.header-item  
+            li.header-item
               = link_to "Home", root_path
-            li.header-item  
+            li.header-item
               = link_to "About", about_path
             - if current_user
               li.header-item
                 = link_to 'LogOut', destroy_user_session_path, method: :delete
               li.header-item
-                - if current_user.image.thumb40.url.present?
-                    = link_to "#{current_user.image.thumb40.url} #{current_user.name}", current_user
-                - else
-                    = link_to current_user do
-                      = image_tag("/assets/no_user.png", size: '40x40', class:"header-user-image")
-                      p.header-user
-                        = current_user.name
+                = link_to current_user do
+                  - if current_user.image.present?
+                    = image_tag(current_user.image.url, class: "header-avatar")
+                  - else
+                    = image_tag("/assets/no_user.png", class:"header-avatar")
             - else
               li.header-item
                 = link_to "LogIn", login_path
@@ -39,7 +37,7 @@ html
     
     //header分の空スペース
     .header-space
-    
+
     - flash.each do |key, value|
       = content_tag(:div, value, class: "#{key}") 
 
