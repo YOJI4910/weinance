@@ -2,6 +2,8 @@ table.users-table {
   text-align: left;
   border-collapse: collapse;
   width: 100%;
+  font-family: 'Gidole';
+  font-size: 1.8rem;
 
   th {
     color: rgb(132, 142, 156);
@@ -44,6 +46,8 @@ table.users-table {
     td {
       vertical-align: middle;
       padding: 20px 0 20px 12px;
+      font-weight: normal;
+
 
       .follow-btn {
         font-size: 2rem;
@@ -73,10 +77,8 @@ table.users-table {
 
 .pluscolor {
   color: $plus-change;
-  font-weight: bold;
 }
 
 .minuscolor {
   color: $minus-change;
-  font-weight: bold;
 }

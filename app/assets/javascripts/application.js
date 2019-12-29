@@ -36,4 +36,20 @@ $(function() {
     $('#avatar-present').remove();
     readURL(this);
   });
+
+  // showページタブ切り替え
+  $('.tab-content>div').hide();
+  $('.tab-content>div').first().slideDown();
+  $('.tab-btns span').click(function(){
+    var thisclass=$(this).attr('class');
+    $('#lamp').removeClass().addClass('#lamp').addClass(thisclass);
+    $('.tab-content>div').each(function(){
+      if($(this).hasClass(thisclass)){
+        $(this).fadeIn(800);
+      }
+      else{
+        $(this).hide();
+      }
+    });
+  });
 });
