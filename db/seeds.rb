@@ -26,7 +26,7 @@ r2 = Random.new()
 users= User.all
 
 40.times do |n|
-  weight = r2.rand(55.0..100.0)
+  weight = r2.rand(55.0..100.0).round(1)
   to = Time.zone.now
   from = to - 60.days
 

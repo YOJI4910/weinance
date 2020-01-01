@@ -1,2 +1,6 @@
-h1 Records#edit
-p Find me in app/views/records/edit.html.slim
+section.record
+  = form_with model: @record, class: 'box', local: true do |f|
+    h1 記録の修正
+    = f.label '体重 / kg'
+    = f.number_field :weight, step: 0.1, autocomplete: "weight"
+    = f.submit "修正を保存"

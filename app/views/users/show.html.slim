@@ -37,17 +37,41 @@ section.show-sec
       .tab-btns
         span.content1 記録履歴
         span.content2 グラフ
-        span.content3 フォロー
+        span.content3 フォロワー
         #lamp.content1
       .tab-content
         .content1
-          | testtesteteset
+          table.users-table
+            thead.users-table-head
+            tr
+              th Weight
+              th BMI
+              th Date
+              th.edit-col
+            tbody.users-table-body
+              = render partial: 'record_history', collection: @records, as: 'record'
         .content2
           canvas#myChart
         .content3
-          | フォローリスト
+          = render partial: 'follower_list', collection: @followers, as: 'follower'
 
 javascript:
+  // showページタブ切り替え
+  $('.tab-content>div').hide();
+  $('.tab-content>div').first().slideDown();
+  $('.tab-btns span').click(function(){
+    var thisclass=$(this).attr('class');
+    $('#lamp').removeClass().addClass('#lamp').addClass(thisclass);
+    $('.tab-content>div').each(function(){
+      if($(this).hasClass(thisclass)){
+        $(this).fadeIn(800);
+      }
+      else{
+        $(this).hide();
+      }
+    });
+  });
+  // チャート
   var ctx = document.getElementById("myChart").getContext('2d');
   var Graph = new Chart(ctx, {
     type: 'line',
