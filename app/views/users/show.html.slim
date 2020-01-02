@@ -9,6 +9,9 @@ section.show-sec
           .user-menu
             = link_to 'プロフィール編集', edit_user_registration_path(@user), class:'btn btn-secondary'
             = link_to 'ログアウト', destroy_user_session_path, method: :delete, class:'btn btn-danger'
+        - else
+          .follow-beside-avatar
+            = render partial: 'follow_btn', locals: { follower: @user, url_part: "inshow"}
     .user-info
       .info-item
         dt Height
@@ -49,7 +52,7 @@ section.show-sec
               = render partial: 'record_history', collection: @records, as: 'record'
         .content2
           canvas#myChart
-        .content3
+        .content3.follower-grid
           = render partial: 'follower_list', collection: @followers, as: 'follower'
 
 javascript:

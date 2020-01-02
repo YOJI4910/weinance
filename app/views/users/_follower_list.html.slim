@@ -1,10 +1,8 @@
-.follower-list-wrapper
-  .follower-cards
-    .follower-card
-      .card-inner
-        .follower-image
-          = image_tag follower.avatar_url, class: "follower-avatar"
-        .follower-name= follower.name
-        - if @user == current_user
-          div id="user-#{follower.id}" class="follow-btn-wrapper"
-            = render partial:'follow_btn', locals: { follower: follower}
+.follower-card
+  .card-inner
+    .follower-image
+      = image_tag follower.avatar_url, class: "follower-avatar"
+    .follower-name= follower.name
+    - if @user == current_user
+      div id="user-#{follower.id}"
+        = render partial:'follow_btn', locals: { follower: follower, url_part: "inlist"}

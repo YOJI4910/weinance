@@ -18,6 +18,8 @@ Rails.application.routes.draw do
     # resorcesにさらにルートを追加. memberは:idのあとに続くという意味
     get :follows, on: :member
     get :followers, on: :member
+    post :relationships_inlist, to: 'relationships#create_inlist'
+    delete :relationships_inlist, to: 'relationships#destroy_inlist'
     post :relationships_inshow, to: 'relationships#create_inshow'
     delete :relationships_inshow, to: 'relationships#destroy_inshow'
   end
