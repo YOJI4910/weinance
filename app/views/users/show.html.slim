@@ -2,10 +2,7 @@ section.show-sec
   .inner
     .show-head
       .user-avatar
-        - if @user.image?
-          = image_tag @user.image.url, class:"show-avatar"
-        -else
-          = image_tag "/assets/no_user.png", class: "show-avatar"
+        = image_tag @user.avatar_url, class: "show-avatar"
       .user-manage
         h1= @user.name
         - if current_user == @user

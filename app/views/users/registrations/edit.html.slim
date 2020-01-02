@@ -8,10 +8,7 @@ section.custom-sec
       .avatar-edit
         .avatar-show
           img id="avatar-prev" src="#" class='hidden avatar-img'
-          - if resource.image.present?
-            = image_tag resource.image.thumb.url, id: 'avatar-present', class: 'avatar-img'
-          - else
-            = image_tag "/assets/no_user.png", id: 'avatar-present', class: 'avatar-img'
+          = image_tag resource.avatar_url, id: 'avatar-present', class: 'avatar-img'
         .avatar-input-field
           label for="avatar-edit-field"
             | 画像を変更

@@ -43,6 +43,11 @@ class User < ApplicationRecord
     followings.include?(other_user)
   end
 
+  def avatar_url
+    url = self.image.url || "/assets/no_user.png"
+    return url
+  end
+
   def display_height
     if self.height.blank?
       "―"

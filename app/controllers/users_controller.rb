@@ -12,6 +12,6 @@ class UsersController < ApplicationController
                             to_h {|k,v| [k, v.map(&:weight).sum / v.count]} # レコードから体重を抽出  "10/04" => 体重の平均値
     @labels = record_last30.keys
     @datas = record_last30.values
-    @followers = @user.passive_relationships.all
+    @followers = @user.followers
   end
 end

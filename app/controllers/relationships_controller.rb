@@ -16,4 +16,18 @@ class RelationshipsController < ApplicationController
     @follow_user = User.find(params[:user_id])
     # destroy.js.erbでrender
   end
+
+  def create_inshow
+    follower = User.find(params[:user_id])
+    current_user.follow(follower)
+    @follower = User.find(params[:user_id])
+    # create_inshow.js.erbでrenderされる
+  end
+
+  def destroy_inshow
+    follow_user = current_user.active_relationships.find_by(follower_id: params[:user_id])
+    follow_user.destroy
+    @follower = User.find(params[:user_id])
+    # delete_inshow.js.erbでrenderされる
+  end
 end

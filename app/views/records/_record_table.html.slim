@@ -16,8 +16,7 @@ table.users-table
             = render partial: 'follow', locals: { user: user }
           td
             = link_to user, class:"table-usernames" do
-              = user.image.url.present? ? image_tag(user.image.url, class:'table-avatar') :\
-                                          image_tag("/assets/no_user.png", class: 'table-avatar')
+              = image_tag(user.avatar_url, class:'table-avatar')
               p.table-username
                 = user.name
           td= user.display_latest
