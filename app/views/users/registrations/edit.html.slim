@@ -7,16 +7,14 @@ section.custom-sec
       / ユーザー画像編集セクション
       .avatar-edit
         .avatar-show
-          - if resource.image.present?
-            = image_tag resource.image.url
-          - else
-            = image_tag "/assets/no_user.png", class: "top-image", size: '150x150'
+          img id="avatar-prev" src="#" class='hidden avatar-img'
+          = image_tag resource.avatar_url, id: 'avatar-present', class: 'avatar-img'
         .avatar-input-field
-          label for="avatar-edit-btn"
+          label for="avatar-edit-field"
             | 画像を変更
             br
-            = f.file_field :image, id: "avatar-edit-btn", class: "avatar-edit-btn"
-        = render "devise/shared/error_messages", resource: resource
+            = f.file_field :image, id: "avatar-edit-field", class: "avatar-edit-field"
+        = render "users/shared/error_messages", resource: resource
 
       / ユーザー画像以外編集セクション
       .profile-edit
@@ -27,6 +25,9 @@ section.custom-sec
         .input-field
           = f.label :email
           = f.email_field :email, autofocus: true, autocomplete: "email"
+        .input-field
+          = f.label :"身長 / cm"
+          = f.number_field :height, step: 0.1, autofocus: true, autocomplete: "height"
         .input-field
           = f.label :password
             | パスワード

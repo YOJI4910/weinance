@@ -1,0 +1,8 @@
+.follower-card
+  .card-inner
+    .follower-image
+      = image_tag follower.avatar_url, class: "follower-avatar"
+    .follower-name= follower.name
+    - if @user == current_user
+      div id="user-#{follower.id}"
+        = render partial:'follow_btn', locals: { follower: follower, url_part: "inlist"}

@@ -16,16 +16,12 @@ class RecordsController < ApplicationController
     end
   end
 
-  def show
-  end
-
   def new
     @record = Record.new
   end
 
   def create
     @record = current_user.records.new(record_params)
-
     if @record.save
       redirect_to root_url, notice: '体重を記録しました。'
     else
@@ -34,6 +30,16 @@ class RecordsController < ApplicationController
   end
 
   def edit
+    @record = Record.find(params[:id])
+  end
+
+  def update
+    @record = Record.find(params[:id])
+    if @record.update(record_params)
+      redirect_to user_path(@record.user), notice: '体重記録を修正しました'
+    else
+      render :edit
+    end
   end
 
   private

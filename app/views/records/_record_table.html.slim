@@ -16,15 +16,12 @@ table.users-table
             = render partial: 'follow', locals: { user: user }
           td
             = link_to user, class:"table-usernames" do
-              = user.image.thumb25.url.present? ? image_tag(user.image.thumb25.url, class:'table-userimage') :\
-                                                  image_tag("/assets/no_user.png",size:"25x25")
+              = image_tag(user.avatar_url, class:'table-avatar')
               p.table-username
                 = user.name
-          td= "#{user.lastest_weight} kg"
-          - if user.weight_change_rate >= 0
-            td.pluscolor= "+ #{user.weight_change_rate} %"
-          - else
-            td.minuscolor= "− #{user.weight_change_rate.abs} %"
+          td= user.display_latest
+          td class="#{user.change_class}"
+            = user.display_change
           td= user.bmi
           td.date-col= record.created_at.strftime("%Y/%m/%d")
 .d-flex.justify-content-center.mt-3

@@ -5,7 +5,7 @@ section.records-sec
   .inner
     .records-search
       / 検索ボックス
-    .users-body
+    .records-body
       ul.nav.nav-tabs
         li.nav-item
           a href="#all-content" class="nav-link #{ 'active' unless params[:active_tab] == 'favs' }" data-toggle="tab" All
@@ -16,11 +16,11 @@ section.records-sec
         div id="all-content" class="tab-pane #{ 'active' unless params[:active_tab] == 'favs' }"
           = render partial: 'record_table', locals: { records: @records, pagy_var: @pagy_all }
         div id="fav-content" class="tab-pane #{ 'active' if params[:active_tab] == 'favs' }"
-          - if current_user.present?
+          - if user_signed_in?
             = render partial: 'record_table', locals: { records: @fav_records, pagy_var: @pagy_fav }
           - else
             p.logout-tab-content ログインすると表示されます。 
 
-  - if current_user
+  - if user_signed_in?
     .record-btn 
       = link_to "+", new_record_path, id:'record_submit'

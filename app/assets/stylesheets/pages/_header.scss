@@ -1,4 +1,4 @@
-#header {
+.header {
   width: 100%;
   height: $header-height;
   position: fixed;
@@ -9,48 +9,57 @@
 
   .inner {
     height: 100%;
-  }
-  nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 100%;
 
-    .header-logo {
-      font-size: 4rem;
-      
-      a {
-        color: $logo-color;
-        text-decoration: none;
-
-        &:hover {
-          opacity: 0.8;
-        }
-      }
-    }
-
-    .header-list {
-      width: 100%;
-      max-width: 400px;
+    nav {
       display: flex;
       align-items: center;
       justify-content: space-between;
+      height: 100%;
 
-      .header-item {
-
-        a {
-          text-decoration: none;
-          font-weight: bold;
-          color: $gray-color;
-        }
+      .header-logo {
+        font-size: 4rem;
         
-        &._register {
-          background-color: $logo-color;
-          border-radius: 20%;
-          padding: 5px;
+        a {
+          color: $logo-color;
+          text-decoration: none;
+
+          &:hover {
+            opacity: 0.8;
+          }
+        }
+      }
+
+      .header-list {
+        width: 100%;
+        max-width: 400px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .header-item {
+          padding-top: 4px;
 
           a {
-            color: #000000;
+            text-decoration: none;
+            font-weight: bold;
+            color: $gray-color;
+          }
+
+          .header-avatar {
+            height: 40px;
+            width: 40px;
+            object-fit: cover;
+            border-radius: 50%;
+          }
+          
+          &._register {
+            background-color: $logo-color;
+            border-radius: 20%;
+            padding: 5px;
+
+            a {
+              color: #000000;
+            }
           }
         }
       }
@@ -79,14 +88,6 @@
     opacity: 0.8;
     cursor: pointer;
   }
-}
-
-.header-user-image {
-  border-radius: 50%;
-}
-
-.header-user {
-  font-size: 1.4rem;
 }
 
 .header-space {

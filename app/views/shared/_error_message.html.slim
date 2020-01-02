@@ -1,7 +1,0 @@
-- if model.errors.any?
-  .error-wrapper
-    h3.error-alert
-      = "The form contains #{pluralize(model.errors.count, 'error')}."
-    ul.error-detail
-      - model.errors.full_messages.each do |msg|
-        li= msg

@@ -1,0 +1,6 @@
+- if current_user.following?(follower)
+  = link_to "/users/#{follower.id}/relationships_#{url_part}", method: :delete, remote: true, class: "followed-btn" do
+    span フォロー中
+- else
+  = link_to "/users/#{follower.id}/relationships_#{url_part}", method: :post, remote: true, class: "follow-btn" do
+    span フォロー

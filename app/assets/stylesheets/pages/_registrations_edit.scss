@@ -1,5 +1,6 @@
 .custom-sec {
   padding: 50px 0;
+
   .custom-wrapper{
     display: flex;
     justify-content: center;
@@ -7,6 +8,20 @@
     .avatar-edit{
       text-align: center;
       padding-top: 50px;
+
+      .avatar-show {
+
+        .avatar-img{
+          border-radius: 50%;
+          height: 150px;
+          width: 150px;
+          object-fit: cover;
+        }
+
+        .hidden {
+          display: none;
+        }
+      }
 
       .avatar-input-field{
         margin-top: 20px;
@@ -28,7 +43,7 @@
       margin-left: 30px;
 
       h1 {
-        font-size: 3rem;
+        font-size: 2.5rem;
       }
 
       .input-field {
@@ -42,7 +57,7 @@
           font-size: 1.2rem;
         }
 
-        input[type="text"], input[type="email"], input[type="password"] {
+        input[type="text"], input[type="email"], input[type="number"], input[type="password"] {
           border: 0;
           background: none;
           display: block;
@@ -56,7 +71,8 @@
           transition: 0.25s;
         }
   
-        input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focus {
+        input[type="text"]:focus, input[type="email"]:focus,
+        input[type="number"]:focus, input[type="password"]:focus {
           width: 280px;
           border-color: #55efc4;
         }

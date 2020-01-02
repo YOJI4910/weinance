@@ -3,3 +3,43 @@
       @content;
   }
 }
+
+.followed-btn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 150px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  height: 4rem;
+  border-radius: 20px;
+  margin: 0 auto;
+  color: #fff;
+  background: #e74c3c;
+
+  &:hover {
+    color: #fff;
+    opacity: 0.9;
+  }
+}
+
+.follow-btn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 150px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  height: 4rem;
+  border-radius: 20px;
+  margin: 0 auto;
+  color: #000;
+  background: rgb(240, 240, 240);
+
+  &:hover {
+    color: #000;
+    opacity: 0.9;
+  }
+}

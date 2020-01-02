@@ -8,7 +8,7 @@ User.create!(
 
 r = Random.new()
 
-34.times do |n|
+24.times do |n|
   name = Faker::Name.name
   email = "examples-#{n+1}@example.com"
   height = r.rand(150.0..185.0).round(1)
@@ -26,7 +26,7 @@ r2 = Random.new()
 users= User.all
 
 40.times do |n|
-  weight = r2.rand(55.0..100.0)
+  weight = r2.rand(55.0..100.0).round(1)
   to = Time.zone.now
   from = to - 60.days
 

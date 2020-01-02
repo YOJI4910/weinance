@@ -3,15 +3,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :omniauthable, omniauth_providers: %i[facebook twitter google_oauth2]
 
-
-  # validates :name, presence: true, length: { maximum: 50 }
-  # validates :height, presence: true
-
-  # before_save { self.email = email.downcase }
-  # VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-  # validates :email, presence: true, length: { maximum: 255 },  format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false }
-  # validates :password, presence: true, length: { minimum: 6 }
-
   has_many :records
 
   # ========================================================フォローしているユーザー視点
@@ -52,39 +43,58 @@ class User < ApplicationRecord
     followings.include?(other_user)
   end
 
-  # 過去30日の最小体重を返す
-  def min_weight
+  def avatar_url
+    url = self.image.url || "/assets/no_user.png"
+    return url
+  end
+
+  def display_height
+    if self.height.blank?
+      "―"
+    else
+      "#{self.height} cm" 
+    end
+  end
+
+  # 過去30日の最高体重を返す
+  def display_max
     if self.has_record?
-      self.records.where('created_at >= ?', 30.days.ago).
-          pluck('weight').
-          min.
-          round(Constants::NUM_OF_DECIMAL_IN_WEIGHT)
+      "#{ self.records.
+            where('created_at >= ?', 30.days.ago).
+            pluck('weight').
+            max.
+            round(Constants::NUM_OF_DECIMAL_IN_WEIGHT) } kg"
     else
       "―"
     end
   end
 
-  # 過去30日の最高体重を返す
-  def max_weight
+  # 過去30日の最小体重を返す
+  def display_min
     if self.has_record?
-      self.records.
-          where('created_at >= ?', 30.days.ago).
-          pluck('weight').
-          max.
-          round(Constants::NUM_OF_DECIMAL_IN_WEIGHT)
+      "#{ self.records.where('created_at >= ?', 30.days.ago).
+            pluck('weight').
+            min.
+            round(Constants::NUM_OF_DECIMAL_IN_WEIGHT) } kg"
     else
       "―"
     end
   end
 
   # 最後に記録した体重を返す
-  def lastest_weight
+  def latest_weight
     if self.has_record?
       self.records.
           order(created_at: :DESC).
           first.
           weight.
           round(Constants::NUM_OF_DECIMAL_IN_WEIGHT)
+    end
+  end
+
+  def display_latest
+    if latest_weight.present?
+      "#{latest_weight} kg"
     else
       "―"
     end
@@ -93,17 +103,34 @@ class User < ApplicationRecord
   def weight_change_rate
     last_datas = self.records.where(created_at: Date.today.last_month.all_month)
     last_avg = last_datas.pluck('weight').sum / last_datas.count
-    ((( self.lastest_weight - last_avg ) / last_avg )*100).
+    ((( self.latest_weight - last_avg ) / last_avg )*100).
       round(Constants::NUM_OF_DECIMAL_IN_CHANGE_RATE)
   rescue ZeroDivisionError
     0
+  end
+
+  def display_change
+    if self.weight_change_rate >= 0
+      "+#{self.weight_change_rate}%"
+    else
+      "#{self.weight_change_rate}%"
+    end
+  end
+
+  # change_rateの値でcssのclass名を返す
+  def change_class
+    if self.weight_change_rate >= 0
+      "pluscolor"
+    else
+      "minuscolor"
+    end
   end
 
   def bmi
     if self.records.present? && self.height.present?
       # 身長 cm -> m
       height_m = self.height / 100
-      (self.lastest_weight / (height_m * height_m) ).
+      (self.latest_weight / (height_m * height_m) ).
         round(Constants::NUM_OF_DECIMAL_IN_HEIGHT)
     else
       "―"

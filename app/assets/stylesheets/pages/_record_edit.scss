@@ -1,12 +1,14 @@
-.register {
+.record {
   background: #34495e;
   height: 100vh;
-  padding-top: 50px;
 
   .box {
     width: 400px;
     padding: 40px;
-    margin: 0 auto; 
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     background: #2d3436;
     text-align: center;
 
@@ -15,7 +17,7 @@
       text-transform: uppercase;
     }
 
-    input[type="text"], input[type="number"], input[type="password"] {
+    input[type="number"] {
       border: 0;
       background: none;
       display: block;
@@ -25,11 +27,12 @@
       padding: 14px 10px;
       width: 200px;
       outline: none;
+      color: white;
       border-radius: 24px;
       transition: 0.25s;
     }
 
-    input[type="text"]:focus, input[type="number"]:focus, input[type="password"]:focus {
+    input[type="number"]:focus {
       width: 280px;
       border-color: #55efc4;
     }

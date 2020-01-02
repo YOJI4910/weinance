@@ -1,0 +1,28 @@
+.follower-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 15px;
+
+  .follower-card {
+    background: #ffdeca;
+    border-radius: 10px;
+    padding: 20px;
+
+    .card-inner {
+      .follower-image {
+        .follower-avatar {
+          width: 90px;
+          height: 90px;
+          border-radius: 50%;
+          object-fit: cover;
+        }
+      }
+
+      .follower-name {
+        font-size: 3rem;
+        font-weight: bold;
+        margin-top: 5px;
+      }
+    }
+  }
+}

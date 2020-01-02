@@ -38,8 +38,16 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
-  # protected
+  protected
 
+  # プロフィール変更の際に、パスワードを変更しないときは入力を求めないようオーバーライド
+  def update_resource(resource, params)
+    if params['password'].blank?
+      resource.update_without_password(params.except('current_password'))
+    else
+      super
+    end
+  end
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_sign_up_params
   #   devise_parameter_sanitizer.permit(:sign_up, keys: [:attribute])
