@@ -27,7 +27,7 @@ gem "omniauth"
 gem 'omniauth-twitter'
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
-
+gem 'faker'
 
 group :development, :test do
   gem 'minitest', '>= 5.12.0'
@@ -38,7 +38,6 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'rubocop-airbnb'
   gem 'dotenv-rails'
-  gem 'faker'
 end
 
 group :development do
