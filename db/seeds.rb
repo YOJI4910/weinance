@@ -1,6 +1,6 @@
 User.create!(
-  name: "first",
-  email: "first@example.com",
+  name: "guest-user",
+  email: "guest@example.com",
   height: 174.0,
   password: 'password',
   password_confirmation: 'password'
