@@ -25,4 +25,4 @@ table.users-table
           td= user.bmi
           td.date-col= record.created_at.strftime("%Y/%m/%d")
 .d-flex.justify-content-center.mt-3
-  == pagy_bootstrap_nav(pagy_var) if pagy_var.pages > 1
+  == pagy_bootstrap_nav(pagy_var) if pagy_var.present?
