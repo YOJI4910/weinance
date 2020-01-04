@@ -1,0 +1,16 @@
+.modal-wrap
+  input id="trigger" type="checkbox"
+    .modal-overlay
+      label for="trigger" class="modal-trigger"
+      .modal-content
+        p ゲストユーザーとしてログインしますか？
+        .modal-select
+          label for="trigger" class="close-btn" キャンセル
+          = form_for(User.new, as: :user, url: session_path(:user)) do |f|
+            = f.hidden_field :email, value: 'guest@example.com'
+            = f.hidden_field :password, value: 'password'
+            = f.submit 'ログイン', class: "signin-as-guest-btn"
+
+label for="trigger" class="open-btn"
+  span ここをクリック！！ ゲストユーザーとしてログインし、すべての機能を試そう！
+.signin-as-guest-spacer

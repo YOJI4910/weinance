@@ -1,0 +1,113 @@
+.modal-wrap {
+
+  input[type="checkbox"] {
+    display: none;
+  }
+
+  .modal-overlay {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: auto;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.7);
+    opacity: 0;
+    transition: opacity 0.5s, transform 0s 0.5s;
+    transform: scale(0);
+
+    .modal-trigger {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
+
+    .modal-content {
+      font-size: 2rem;
+      width: auto;
+      background: #fff;
+      transform: translateY(-100%);
+      transition: 0.5s;
+
+      p {
+        color: gray;
+        padding: 40px 20px;
+      }
+
+      .modal-select {
+        display: flex;
+        border-top: 1px solid gray;
+
+        .close-btn {
+          width: 50%;
+          color: gray;
+          font-size: inherit;
+          text-align: center;
+          border-right: 1px solid gray;
+          cursor: pointer;
+          padding: 20px 0;
+          transition: 0.5s;
+
+          &:hover {
+            background: rgba(128, 128, 128, 0.2);
+          }
+        }
+
+        form {
+          display: block;
+          width: 50%;
+          transition: 0.5s;
+
+          &:hover {
+            background: rgba(255, 102, 14, 0.2);
+          }
+
+          .signin-as-guest-btn {
+            background: transparent;
+            border: none;
+            width: 100%;
+            height: 100%;
+            font-size: inherit;
+            font-weight: bold;
+            color: rgb(255, 102, 14);
+            padding: 20px 0;
+          }
+        }
+      }
+    }
+  }
+}
+
+.modal-wrap input:checked ~ .modal-overlay{
+opacity: 1;
+transform: scale(1);
+transition: opacity 0.5s;
+}
+
+.modal-wrap input:checked ~ .modal-overlay .modal-content{
+transform: translateY(20px);
+}
+
+.open-btn {
+  width: 100%;
+  height: $signin-as-guest-height;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgb(255, 102, 14);
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.signin-as-guest-spacer {
+  width: 100%;
+  height: $signin-as-guest-height;
+}
