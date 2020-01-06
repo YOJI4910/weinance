@@ -1,9 +1,18 @@
 .record-edit-col {
-  width: 20%;
+  display: flex;
+  justify-content: center;
 }
 
 .record-edit-btn {
   font-size: 1.4rem;
   border-radius: 20px;
   padding: 5px 20px 5px 20px;
+}
+
+.record-delete-btn {
+  font-size: 1.4rem;
+  color: #fff;
+  border-radius: 20px;
+  padding: 5px 20px 5px 20px;
+  margin-left: 5px;
 }

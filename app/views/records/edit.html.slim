@@ -2,5 +2,5 @@ section.record
   = form_with model: @record, class: 'box', local: true do |f|
     h1 記録の修正
     = f.label '体重 / kg'
-    = f.number_field :weight, step: 0.1, autocomplete: "weight"
+    = f.number_field :weight, step: 0.1, autocomplete: "weight", id: "edit-record-field"
     = f.submit "修正を保存"

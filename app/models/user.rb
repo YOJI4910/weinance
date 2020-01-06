@@ -58,7 +58,7 @@ class User < ApplicationRecord
 
   # 過去30日の最高体重を返す
   def display_max
-    if self.has_record?
+    if self.has_record_in30?
       "#{ self.records.
             where('created_at >= ?', 30.days.ago).
             pluck('weight').
@@ -71,7 +71,7 @@ class User < ApplicationRecord
 
   # 過去30日の最小体重を返す
   def display_min
-    if self.has_record?
+    if self.has_record_in30?
       "#{ self.records.where('created_at >= ?', 30.days.ago).
             pluck('weight').
             min.
@@ -105,7 +105,7 @@ class User < ApplicationRecord
     last_avg = last_datas.pluck('weight').sum / last_datas.count
     ((( self.latest_weight - last_avg ) / last_avg )*100).
       round(Constants::NUM_OF_DECIMAL_IN_CHANGE_RATE)
-  rescue ZeroDivisionError
+  rescue ZeroDivisionError, NoMethodError
     0
   end
 
@@ -139,6 +139,10 @@ class User < ApplicationRecord
 
   def has_record?
     !!self.records.first
+  end
+
+  def has_record_in30?
+    !!self.records.where('created_at >= ?', 30.days.ago).first
   end
 
   # omniauthのコールバック時に呼ばれるメソッド
