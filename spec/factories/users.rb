@@ -24,7 +24,7 @@ FactoryBot.define do
 
     trait :with_records do
       transient do
-        record_count { 5 }
+        record_count { 1 }
       end
 
       after(:create) do |user, evaluator|
