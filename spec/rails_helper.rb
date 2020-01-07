@@ -39,4 +39,7 @@ RSpec.configure do |config|
 
   # travelメソッド使用のため
   config.include ActiveSupport::Testing::TimeHelpers
+  # Omniatuh specのため
+  OmniAuth.config.test_mode = true
+  config.include OmniAuthHelpers
 end

@@ -5,6 +5,10 @@ class User < ApplicationRecord
 
   has_many :records
 
+  validates :name, presence: true, length: { maximum: 30 }
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i.freeze
+  validates :email, length: { maximum: 255 }, format: { with: VALID_EMAIL_REGEX }
+
   # ========================================================フォローしているユーザー視点
   # 中間テーブルと関係. 外部キーはfollowing_id
   has_many(

@@ -44,7 +44,7 @@ class RecordsController < ApplicationController
 
   def destroy
     Record.find(params[:id]).destroy
-    redirect_to current_user, success: 'レコードを削除しました'
+    redirect_to current_user, notice: 'レコードを削除しました'
   end
 
   private

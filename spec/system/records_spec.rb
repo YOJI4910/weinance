@@ -43,16 +43,16 @@ describe 'レコード', type: :system do
         expect(first("tr#history-#{record.id} td")).to have_content 50.5
       end
 
-      # it 'レコードを削除できる' do
-      #   visit user_path(user)
-      #   expect(first("tr#history-#{record.id} td")).to have_content 88.8
-      #   expect do
-      #     page.accept_confirm do
-      #       first('a.record-delete-btn').click
-      #     end
-      #     expect(page).to have_content 'レコードを削除しました'
-      #   end.to change(Record, :count).by(-1)
-      # end
+      it 'レコードを削除できる', js: true do
+        visit user_path(user)
+        expect(first("tr#history-#{record.id} td")).to have_content 88.8
+        expect do
+          page.accept_confirm do
+            first('a.record-delete-btn').click
+          end
+          expect(page).to have_content 'レコードを削除しました'
+        end.to change(Record, :count).by(-1)
+      end
     end
 
     context 'ログインしていない時' do
