@@ -1,0 +1,14 @@
+- if @user.guest?
+  button class='btn btn-secondary tippy-trigger' プロフィール編集
+- else
+  = link_to 'プロフィール編集', edit_user_registration_path(@user), class:'btn btn-secondary'
+= link_to 'ログアウト', destroy_user_session_path, method: :delete, class:'btn btn-danger'
+
+<script src="https://unpkg.com/tippy.js@5"></script>
+javascript:
+  tippy('.tippy-trigger', {
+    content: 'ゲストユーザーは利用できません',
+    placement: 'bottom-start',
+    duration: 1000,
+    trigger: 'click',
+  });

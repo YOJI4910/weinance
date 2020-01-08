@@ -149,6 +149,11 @@ class User < ApplicationRecord
     !!self.records.where('created_at >= ?', 30.days.ago).first
   end
 
+  # ゲストユーザーであればtrue
+  def guest?
+    self == User.find_by(email: 'guest@example.com')
+  end
+
   # omniauthのコールバック時に呼ばれるメソッド
   def self.find_for_oauth(auth)
     user = User.where(uid: auth.uid, provider: auth.provider).first
