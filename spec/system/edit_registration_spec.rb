@@ -50,7 +50,7 @@ describe 'EditRegistration', type: :system do
           expect(page).to have_content '現在のパスワード が未入力です'
         end
       end
-  
+
       context 'パスワード以外を編集する時' do
         it '現在のパスワードの入力を求められない' do
           fill_in 'user[name]', with: '編集ユーザー'
@@ -75,6 +75,7 @@ describe 'EditRegistration', type: :system do
 
     describe 'ゲストユーザーを編集する' do
       let!(:guest_user) { FactoryBot.create(:user, :guest) }
+
       before do
         visit root_path
       end

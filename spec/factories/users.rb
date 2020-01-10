@@ -6,20 +6,20 @@ FactoryBot.define do
     password { 'password' }
 
     trait :name_invalid do
-      name {''}
+      name { '' }
     end
 
     trait :email_invalid do
-      email {'test-user'} # @以降がない
+      email { 'test-user' } # @以降がない
     end
 
     trait :password_invalid do
-      password {'pass'} # 6文字以上ない
+      password { 'pass' } # 6文字以上ない
     end
 
     trait :guest do
-      name {'guest-user'}
-      email {'guest@example.com'}
+      name { 'guest-user' }
+      email { 'guest@example.com' }
     end
 
     trait :with_records do

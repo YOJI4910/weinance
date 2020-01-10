@@ -2,14 +2,13 @@ require 'rails_helper'
 
 describe 'Users through OmniAuth', type: :system do
   describe 'Omniauthのサインアップ' do
-
     context 'twitterでのサインアップ' do
       before do
         OmniAuth.config.mock_auth[:twitter] = nil
         Rails.application.env_config['omniauth.auth'] = set_omniauth
         visit new_user_registration_path
       end
-  
+
       it 'サインアップをするとユーザー数が増える' do
         expect do
           click_link 'Twitterアカウントでログイン'
@@ -32,10 +31,10 @@ describe 'Users through OmniAuth', type: :system do
     context 'googleでのサインアップ' do
       before do
         OmniAuth.config.mock_auth[:google] = nil
-        Rails.application.env_config['omniauth.auth'] = set_omniauth :google
+        Rails.application.env_config['omniauth.auth'] = set_omniauth(service: :google)
         visit new_user_registration_path
       end
-  
+
       it 'サインアップをするとユーザー数が増える' do
         expect do
           click_link 'Googleアカウントでログイン'
@@ -58,10 +57,10 @@ describe 'Users through OmniAuth', type: :system do
     context 'facebookでのサインアップ' do
       before do
         OmniAuth.config.mock_auth[:facebook] = nil
-        Rails.application.env_config['omniauth.auth'] = set_omniauth :facebook
+        Rails.application.env_config['omniauth.auth'] = set_omniauth(service: :facebook)
         visit new_user_registration_path
       end
-  
+
       it 'サインアップをするとユーザー数が増える' do
         expect do
           click_link 'Facebookアカウントでログイン'

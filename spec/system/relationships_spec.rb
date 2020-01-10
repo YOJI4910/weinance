@@ -16,14 +16,14 @@ describe 'Relationships', type: :system do
       it 'フォロー済み表示され、フォロー/フォロワー数が増える', js: true do
         expect(page).to have_content 'seiya'
         expect(page).to have_content 'soshina'
-          expect do
-            within "tr#record-#{soshina.records.first.id}" do
-              expect(all('.follow-star.fas').length).to eq 0
-              find('.follow-star.far').click
-              expect(all('.follow-star.fas').length).to eq 1
-            end
-          end.to change(seiya.followings, :count).by(1) &
-                 change(soshina.followers, :count).by(1)
+        expect do
+          within "tr#record-#{soshina.records.first.id}" do
+            expect(all('.follow-star.fas').length).to eq 0
+            find('.follow-star.far').click
+            expect(all('.follow-star.fas').length).to eq 1
+          end
+        end.to change(seiya.followings, :count).by(1) &
+                change(soshina.followers, :count).by(1)
       end
     end
 
