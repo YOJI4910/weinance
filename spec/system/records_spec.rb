@@ -8,9 +8,30 @@ describe 'レコード', type: :system do
 
       before do
         visit login_path
-        fill_in "session_email", with: user.email
-        fill_in "session_password", with: user.password
-        click_on 'Log in' # ログイン後、rootページにリダイレクト
+        fill_in "user[email]", with: user.email
+        fill_in "user[password]", with: user.password
+        find('.actions input[type="submit"]').click
+      end
+
+      it 'レコードの内容がルートページに表示される' do
+        # 時間を指定
+        travel_to Time.zone.local(2050, 10, 2) do
+          puts Time.current
+          find("a#record_submit").click
+          fill_in "record_weight", with: '40.0'
+          find("#create_record").click
+        end
+
+        travel_to Time.zone.local(2050, 11, 2) do
+          puts Time.current
+          find("a#record_submit").click
+          fill_in "record_weight", with: '60.0'
+          find("#create_record").click
+        end
+        expect(page).to have_content '2050/11/02' # Datep
+        expect(page).to have_content '60.0' # Last Weight
+        expect(page).to have_content user.bmi
+        expect(page).to have_content '+50.0%' # 1mo. Chg
       end
 
       it 'rootページに投稿ページへのリンクが表示される' do
