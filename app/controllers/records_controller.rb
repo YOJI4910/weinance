@@ -2,7 +2,7 @@ class RecordsController < ApplicationController
   include Pagy::Backend
   include RecordsHelper
 
-  before_action :authenticate_user!, only: [:new, :create, :edit, :show]
+  before_action :authenticate_user!, except: :index
 
   def index
     user_ids = Record.all.pluck(:user_id)
