@@ -20,6 +20,7 @@ html
     = yield
     = render 'layouts/footer'
 
+    <script src="https://unpkg.com/tippy.js@5"></script>
     = debug(params) if Rails.env.development?
 
 
