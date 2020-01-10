@@ -9,7 +9,8 @@ ja:
         current_password: 現在のパスワード
         current_sign_in_at: 現在のログイン時刻
         current_sign_in_ip: 現在のログインIPアドレス
-        email: Eメール
+        name: ユーザー名
+        email: メールアドレス
         encrypted_password: 暗号化パスワード
         failed_attempts: 失敗したログイン試行回数
         last_sign_in_at: 最終ログイン時刻
@@ -31,9 +32,30 @@ ja:
       models:
         user:
           attributes:
+            name:
+              blank: "が未入力です"
+              too_short: "は%{count}文字以上に設定して下さい"
+              too_long: "は%{count}文字以下に設定して下さい"
+              invalid: "は有効でありません"
+            email:
+              blank: "が未入力です"
+              too_short: "は%{count}文字以上に設定して下さい"
+              too_long: "は%{count}文字以下に設定して下さい"
+              invalid: "は有効でありません"
             current_password:
-              blank: "が空になっています"
-              invalid: "が違います"
+              blank: "が未入力です"
+              invalid: "は有効ではありません"
+            password:
+              blank: "が未入力です"
+              too_short: "は%{count}文字以上に設定して下さい"
+              too_long: "は%{count}文字以下に設定して下さい"
+              invalid: "は有効でありません"
+            password_confirmation:
+              blank: "が未入力です"
+              too_short: "は%{count}文字以上に設定して下さい"
+              too_long: "は%{count}文字以下に設定して下さい"
+              invalid: "は有効でありません"
+              confirmation: "が一致しません"
   users:
     confirmations:
       confirmed: メールアドレスが確認できました。
@@ -119,8 +141,8 @@ ja:
       already_signed_out: 既にログアウト済みです。
       new:
         sign_in: ログイン
-      signed_in: ログインしました。
-      signed_out: ログアウトしました。
+      signed_in: ログインしました
+      signed_out: ログアウトしました
     shared:
       links:
         back: 戻る

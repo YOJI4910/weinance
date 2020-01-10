@@ -12,16 +12,16 @@ section.register-sec
           = f.text_field :name, placeholder: 'ex) 日本 太郎',
                   autofocus: true
         .input-field
-          = f.label :email
+          = f.label 'メールアドレス'
           = f.email_field :email, placeholder: 'ex) xxxx@example.com',
                   autofocus: true, autocomplete: "email"
         .input-field
           = f.label :password
           - if @minimum_password_length
-            em
-              | (
+            span.pass-min-letters
+              | *
               = @minimum_password_length
-              |  字以上)
+              | 字以上
           = f.password_field :password, autocomplete: "new-password"
         .input-field
           = f.label :password_confirmation

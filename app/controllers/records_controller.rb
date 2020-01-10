@@ -2,7 +2,7 @@ class RecordsController < ApplicationController
   include Pagy::Backend
   include RecordsHelper
 
-  before_action :authenticate_user!, only: [:new, :create, :edit, :show]
+  before_action :authenticate_user!, except: :index
 
   def index
     user_ids = Record.all.pluck(:user_id)
@@ -40,6 +40,11 @@ class RecordsController < ApplicationController
     else
       render :edit
     end
+  end
+
+  def destroy
+    Record.find(params[:id]).destroy
+    redirect_to current_user, notice: 'レコードを削除しました'
   end
 
   private

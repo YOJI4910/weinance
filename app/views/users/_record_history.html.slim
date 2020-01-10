@@ -2,4 +2,8 @@ tr id="history-#{record.id}"
   td= record.display_weight
   td= record.display_bmi
   td= record.created_at.strftime("%Y/%m/%d")
-  td.record-edit-col= link_to "修正", edit_record_path(record), class: 'btn btn-secondary record-edit-btn'
+  - if @user == current_user
+    td.record-edit-col
+      = link_to "修正", edit_record_path(record), class: 'btn btn-secondary record-edit-btn'
+      = link_to '削除', record_path(record),
+        class: 'btn btn-danger record-delete-btn', method: :delete, data: { confirm: "削除しますか？"}

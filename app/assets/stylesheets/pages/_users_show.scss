@@ -30,7 +30,7 @@
         .user-menu {
           margin-top: 10px;
 
-          a {
+          a, button {
             font-size: 1.4rem;
             border-radius: 20px;
 
@@ -112,6 +112,10 @@
 
       .tab-content {
         padding: 15px;
+
+        .edit-col {
+          width: 30%;
+        }
       }
     }
   }

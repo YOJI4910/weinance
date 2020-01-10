@@ -7,8 +7,7 @@ section.show-sec
         h1= @user.name
         - if current_user == @user
           .user-menu
-            = link_to 'プロフィール編集', edit_user_registration_path(@user), class:'btn btn-secondary'
-            = link_to 'ログアウト', destroy_user_session_path, method: :delete, class:'btn btn-danger'
+            = render 'user_menu'
         - else
           .follow-beside-avatar
             = render partial: 'follow_btn', locals: { follower: @user, url_part: "inshow"}
@@ -24,7 +23,7 @@ section.show-sec
         dd class="#{@user.change_class}"
           = @user.display_change
       .info-item
-        dt 1mo. Hight
+        dt 1mo. High
         dd= @user.display_max
       .info-item
         dt 1mo. Low
