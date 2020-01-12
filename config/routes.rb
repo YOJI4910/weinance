@@ -24,4 +24,5 @@ Rails.application.routes.draw do
     delete :relationships_inshow, to: 'relationships#destroy_inshow'
   end
   resources :records
+  resources :health_check, only: [:index]
 end
