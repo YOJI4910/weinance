@@ -11,6 +11,7 @@ RUN apt-get install -y build-essential
 RUN apt-get install -y libpq-dev
 RUN apt-get install -y nodejs
 RUN apt-get install -y vim
+RUN gem install bundler:2.1.4
 
 # 作業ディレクトリの作成、設定
 RUN mkdir /app_name
