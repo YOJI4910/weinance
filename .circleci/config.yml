@@ -5,7 +5,12 @@ jobs:
   build: 
     docker: 
       - image: circleci/ruby:2.6.3-stretch-node
+        environment:
+          RAILS_ENV: test
       - image: mysql:5.7
+        environment:
+          MYSQL_USER: root
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
     working_directory: ~/repo
     steps: 
       - checkout
@@ -83,6 +88,12 @@ workflows:
       - build_image:
           requires:
             - build
+          filters:
+            branches:
+              only: master
+      - deploy:
+          requires:
+            - build_image
           filters:
             branches:
               only: master
