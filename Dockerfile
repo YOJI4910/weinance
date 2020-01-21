@@ -3,19 +3,6 @@ FROM ruby:2.6.3
 
 ENV LANG C.UTF-8
 
-# RUN: docker buildする時に実行される. imageの中で実行するshellコマンド
-# 必要なパッケージのインストール(基本的)
-# RUN apt-get update -qq && apt-get install -y build-essential nodejs
-RUN apt-get update -qq
-RUN apt-get install -y build-essential
-RUN apt-get install -y libpq-dev
-RUN apt-get install -y nodejs
-RUN apt-get install -y vim
-RUN gem install bundler:2.1.4
-
-# 作業ディレクトリの作成、設定
-RUN mkdir /app_name
-
 # RAILS_ENV と RAILS_MASTER_KEY をあと差し
 ARG RAILS_ENV
 ARG RAILS_MASTER_KEY
@@ -29,6 +16,19 @@ ENV RAILS_ENV ${RAILS_ENV}
 ENV RAILS_MASTER_KEY ${RAILS_MASTER_KEY}
 
 WORKDIR $APP_ROOT
+
+# RUN: docker buildする時に実行される. imageの中で実行するshellコマンド
+# 必要なパッケージのインストール(基本的)
+# RUN apt-get update -qq && apt-get install -y build-essential nodejs
+RUN apt-get update -qq
+RUN apt-get install -y build-essential
+RUN apt-get install -y libpq-dev
+RUN apt-get install -y nodejs
+RUN apt-get install -y vim
+RUN gem install bundler:2.1.4
+
+# 作業ディレクトリの作成、設定
+# RUN mkdir /app_name
 
 # COPY: ローカルファイルをコンテナへコピー(ホスト→コンテナ)
 # ADD: ファイル、ディレクトリなどをコンテナの指定されたパスにコピー
