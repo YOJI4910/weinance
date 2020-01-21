@@ -16,10 +16,18 @@ RUN gem install bundler:2.1.4
 # 作業ディレクトリの作成、設定
 RUN mkdir /app_name
 
+# RAILS_ENV と RAILS_MASTER_KEY をあと差し
+ARG RAILS_ENV
+ARG RAILS_MASTER_KEY
+
 ## 作業ディレクトリ名をAPP_ROOTに割り当てて、以下$APP_ROOTで参照
 # コンテナ起動時の作業ディレクトリの中で指定. 
 # WORKDIR: 起点となるディレクトリを設定 相対パスを使うときに起点になる
 ENV APP_ROOT /app_name
+# あと差しした RAILS_ENV と RAILS_MASTER_KEY を環境変数に設定
+ENV RAILS_ENV ${RAILS_ENV}
+ENV RAILS_MASTER_KEY ${RAILS_MASTER_KEY}
+
 WORKDIR $APP_ROOT
 
 # COPY: ローカルファイルをコンテナへコピー(ホスト→コンテナ)
@@ -32,6 +40,10 @@ COPY ./Gemfile.lock $APP_ROOT/Gemfile.lock
 RUN bundle install
 COPY . $APP_ROOT
 
+RUN if ["${RAILS_ENV}" = "production"]; then bundle exec rails assets precompile; else export RAILS_ENV=development; fi
+
+EXPOSE 3000
+CMD bundler && rails server -b 0.0.0.0; fi
 # docker-compose up: dockerfileを基にコンテナの作成と開始
 # docker exec -it todo_app_1 /bin/bash: dockerの中に入る
 
