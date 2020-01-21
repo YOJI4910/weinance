@@ -49,6 +49,6 @@ test:
 production:
   <<: *default
   host: <%= ENV['DB_HOST'] %>
-  database: app_name_production
+  database: weinance_db
   username: <%= ENV['DB_USER'] %>
   password: <%= ENV['DB_PASSWORD'] %>
