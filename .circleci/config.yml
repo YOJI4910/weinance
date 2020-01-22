@@ -48,6 +48,10 @@ jobs:
       - checkout
       - setup_remote_docker
       - run:
+          name: Setup environment variable
+          command: |
+            echo "export COMPOSE_FILE=docker-compose.ci.yml" >> $BASH_ENV
+      - run:
           name: install aws cli
           command: |
             apk add --no-cache --update py-pip
