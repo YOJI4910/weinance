@@ -6,6 +6,7 @@ jobs:
         environment:
           RAILS_ENV: test
           DB_HOST: 127.0.0.1
+          DB_USERNAME: 'root'
       - image: circleci/mysql:5.7
         environment:
           MYSQL_USER: root
