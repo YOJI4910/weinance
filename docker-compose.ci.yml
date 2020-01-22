@@ -36,8 +36,8 @@ services:
     tty: true
     stdin_open: true
 
-  # Headless chrome用
-  chrome:
-    image: selenium/standalone-chrome
-    ports:
-      - "4444:4444"
+  # # Headless chrome用
+  # chrome:
+  #   image: selenium/standalone-chrome
+  #   ports:
+  #     - "4444:4444"
