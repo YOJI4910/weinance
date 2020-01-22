@@ -34,10 +34,6 @@ jobs:
           command: dockerize -wait tcp://127.0.0.1:3306 -timeout 120s
       - run: bundle exec rake db:create
       - run: bundle exec rake db:schema:load
-      - run: 
-          name: Update ChromeDriver Version
-          command: |
-            bundle exec rake webdrivers:chromedriver:update
       - run:
           name: Rspec
           command: |
