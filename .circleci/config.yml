@@ -41,14 +41,7 @@ jobs:
       - run:
           name: Rspec
           command: |
-            mkdir /tmp/test-results
-            TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | \
-              circleci tests split --split-by=timings)"
-            bundle exec rspec \
-              --format progress \
-              --out /tmp/test-results/rspec.xml \
-              --format progress \
-              $TEST_FILES
+            bundle exec rspec
   build_image:
     docker:
       - image: docker:19.03.5
