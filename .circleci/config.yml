@@ -14,46 +14,26 @@ jobs:
     working_directory: ~/repo
     steps: 
       - checkout
+      - setup_remote_docker
       - run:
-          name: bundle update
-          command: gem install bundler:2.1.4
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "Gemfile.lock" }}
-            - v1-dependencies-
-      - run:
-          name: install dependencies
+          name: Setup environment variable
           command: |
-            bundle install --jobs=4 --retry=3 --path vendor/bundle
-      - save_cache:
-          paths:
-            - ./vendor/bundle
-          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+            echo "export COMPOSE_FILE=docker-compose.ci.yml" >> $BASH_ENV
       - run:
-          name: Wait for DB
-          command: dockerize -wait tcp://127.0.0.1:3306 -timeout 120s
-      - run: bundle exec rake db:create
-      - run: bundle exec rake db:schema:load
-      - run: 
-          name: Update ChromeDriver Version
+          name: Start containers and verify it is working
           command: |
-            CHROME_VERSION=$(google-chrome --version | sed -r 's/[^0-9]+([0-9]+\.[0-9]+\.[0-9]+).*/\1/g')
-            CHROMEDRIVER_VERSION=$(curl -s https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$CHROME_VERSION)
-            bundle exec rake webdrivers:chromedriver:update
+            set -x
+            docker-compose up -d
+            docker exec weinance_app curl -4 --retry 10 --retry-delay 3 --retry-connrefused http://localhost:3000
       - run:
-          name: Rspec
-          command: |
-            bundle exec rspec
+          name: Run rspec
+          command: docker-compose run web bin/rspec
   build_image:
     docker:
       - image: docker:19.03.5
     steps:
       - checkout
       - setup_remote_docker
-      - run:
-          name: Setup environment variable
-          command: |
-            echo "export COMPOSE_FILE=docker-compose.ci.yml" >> $BASH_ENV
       - run:
           name: install aws cli
           command: |
