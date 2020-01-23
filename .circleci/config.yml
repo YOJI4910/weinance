@@ -24,7 +24,7 @@ jobs:
           command: |
             set -x
             docker-compose up -d
-            docker exec weinance_web_1 curl -4 --retry 10 --retry-delay 3 --retry-connrefused http://localhost:3000
+            docker exec repo_web_1 curl -4 --retry 10 --retry-delay 3 --retry-connrefused http://localhost:3000
       - run:
           name: Run rspec
           command: docker-compose run web bin/rspec
