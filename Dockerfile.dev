@@ -14,10 +14,7 @@ WORKDIR $APP_ROOT
 # 必要なパッケージのインストール(基本的)
 # RUN apt-get update -qq && apt-get install -y build-essential nodejs
 RUN apt-get update -qq
-RUN apt-get install -y build-essential
-RUN apt-get install -y libpq-dev
-RUN apt-get install -y nodejs
-RUN apt-get install -y vim
+RUN apt-get install -y build-essential libpq-dev nodejs vim
 RUN gem install bundler:2.1.4
 
 # 作業ディレクトリの作成、設定

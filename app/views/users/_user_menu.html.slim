@@ -1,7 +1,7 @@
 - if @user.guest?
-  button class='btn btn-secondary tippy-trigger' プロフィール編集
+  button id='edit-profile' class='btn btn-secondary tippy-trigger' プロフィール編集
 - else
-  = link_to 'プロフィール編集', edit_user_registration_path(@user), class:'btn btn-secondary'
+  = link_to 'プロフィール編集', edit_user_registration_path(@user), class:'btn btn-secondary', id: 'edit-profile'
 = link_to 'ログアウト', destroy_user_session_path, method: :delete, class:'btn btn-danger'
 
 javascript:
