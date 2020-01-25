@@ -2,8 +2,8 @@
 Web上で体重を記録し、共有できるサービスです。
 楽しみながらダイエットができることを目指して作成しました。  
 
-<img src='./top_readme.png' width=50%> 
-<img src='./user_readme.png' width=50%>
+<img src='./top_readme.png' width=40%>
+<img src='./user_readme.png' width=40%>
 
 ## URL
 https://weinance.xyz/
@@ -55,4 +55,4 @@ awsのインフラをterraformで作成。
 tfstateは、amazon S3 のバケットに保存しています。
 
 ## AWSアーキテクチャ図
-![awsのアーキテクチャ図](./cloud_structure.png)
+![awsのアーキテクチャ図](./cloud_architecture.png)
