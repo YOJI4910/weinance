@@ -1,8 +1,8 @@
 ## Weinanceの概要
 Web上で体重を記録し、共有できるサービスです。
 楽しみながらダイエットができることを目指して作成しました。
-![トップページ](./top_readme.png)
-![トップページ](./user_readme.png)
+<img src='./top_readme.png' width=20%>
+<img src='./user_readme.png' width=20%>
 
 ## URL
 https://weinance.xyz/
@@ -49,9 +49,9 @@ https://weinance.xyz/
   * Terraform
 
 ## Terraform
-awsのインフラをterraformで作成. 
+awsのインフラをterraformで作成。
 冪等性確保の観点からGPGでローカルで公開鍵を作成し,アクセスキー有りのIAMユーザーもterraformで作成。
 tfstateは、amazon S3 のバケットに保存しています。
 
 ## AWSアーキテクチャ図
-![awsのアーキテクチャ図](./aws_structure.png)
+![awsのアーキテクチャ図](./cloud_structure.png)

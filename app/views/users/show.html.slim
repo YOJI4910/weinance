@@ -42,11 +42,12 @@ section.show-sec
         .content1
           table.users-table
             thead.users-table-head
-            tr
-              th Weight
-              th BMI
-              th Date
-              th.edit-col
+              tr
+                th.weight-col Weight
+                th.bmi-col BMI
+                th Date
+                - if @user == current_user
+                  th.edit-col
             tbody.users-table-body
               = render partial: 'record_history', collection: @records, as: 'record'
         .content2
