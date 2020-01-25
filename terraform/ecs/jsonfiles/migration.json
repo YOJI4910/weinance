@@ -1,0 +1,37 @@
+[
+  {
+    "name": "sample-webapp",
+    "image": "674656733927.dkr.ecr.ap-northeast-1.amazonaws.com/sample-image:latest",
+    "cpu": 200,
+    "memory": null,
+    "memoryReservation": 600,
+    "essential": true,
+    "command": ["bundle", "exec", "rake", "db:migrate"],
+    "environment": [
+      {
+        "name": "DB_HOST",
+        "value": "weinance-ecs-terraform-db.csoipdqeamyl.ap-northeast-1.rds.amazonaws.com"
+      },
+      {
+        "name": "DB_USER",
+        "value": "root"
+      },
+      {
+        "name": "DB_PASSWORD",
+        "value": "password"
+      },
+      {
+        "name": "RACK_ENV",
+        "value": "production"
+      }
+    ],
+    "logConfiguration": {
+      "logDriver": "awslogs",
+      "options": {
+        "awslogs-group": "sample-service",
+        "awslogs-region": "ap-northeast-1",
+        "awslogs-stream-prefix": "migration"
+      }
+    }
+  }
+]
