@@ -90,6 +90,7 @@ workflows:
     jobs:
       - build
       - build_image:
+          dockerfile: Dockerfile.ci
           requires:
             - build
           filters:
