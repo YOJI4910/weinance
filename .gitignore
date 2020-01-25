@@ -29,3 +29,11 @@
 /config/master.key
 /mysql/
 /.env
+
+# Local .terraform directories
+**/.terraform/*
+# Compiled files
+*.tfstate
+*.tfstate.*
+# logs
+*.log
