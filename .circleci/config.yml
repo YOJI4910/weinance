@@ -14,26 +14,31 @@ jobs:
     working_directory: ~/repo
     steps: 
       - checkout
-      - setup_remote_docker
       - run:
-          name: Setup environment variable
+          name: bundle update
+          command: gem install bundler:2.1.4
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "Gemfile.lock" }}
+            - v1-dependencies-
+      - run:
+          name: install dependencies
           command: |
-            echo "export COMPOSE_FILE=docker-compose.ci.yml" >> $BASH_ENV
-      - run:
-          name: Start containers and verify it is working
-          command: |
-            set -x
-            docker-compose up -d
-            docker exec repo_web_1 curl -4 --retry 10 --retry-delay 3 --retry-connrefused http://localhost:3000
-      - run:
-          name: Run rspec
-          command: docker-compose run web bin/rspec
+            bundle install --jobs=4 --retry=3 --path vendor/bundle
+      - save_cache:
+          paths:
+            - ./vendor/bundle
+          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
   build_image:
     docker:
       - image: docker:19.03.5
     steps:
       - checkout
       - setup_remote_docker
+      - run:
+          name: Setup environment variable
+          command: |
+            echo "export COMPOSE_FILE=docker-compose.ci.yml" >> $BASH_ENV
       - run:
           name: install aws cli
           command: |

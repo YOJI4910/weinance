@@ -8,6 +8,7 @@ ENV LANG C.UTF-8
 # WORKDIR: 起点となるディレクトリを設定 相対パスを使うときに起点になる
 ENV APP_ROOT /app_name
 
+# 作業ディレクトリの作成、設定
 WORKDIR $APP_ROOT
 
 # RUN: docker buildする時に実行される. imageの中で実行するshellコマンド
@@ -16,9 +17,6 @@ WORKDIR $APP_ROOT
 RUN apt-get update -qq
 RUN apt-get install -y build-essential libpq-dev nodejs vim
 RUN gem install bundler:2.1.4
-
-# 作業ディレクトリの作成、設定
-# RUN mkdir /app_name
 
 # COPY: ローカルファイルをコンテナへコピー(ホスト→コンテナ)
 # ADD: ファイル、ディレクトリなどをコンテナの指定されたパスにコピー
