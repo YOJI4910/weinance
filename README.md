@@ -49,7 +49,7 @@ https://weinance.xyz/
   * Terraform
 
 ## Terraform
-awsのインフラをterraformで作成. 
+awsのインフラをterraformで作成。
 冪等性確保の観点からGPGでローカルで公開鍵を作成し,アクセスキー有りのIAMユーザーもterraformで作成。
 tfstateは、amazon S3 のバケットに保存しています。
 
