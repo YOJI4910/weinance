@@ -2,8 +2,7 @@
 Web上で体重を記録し、共有できるサービスです。
 楽しみながらダイエットができることを目指して作成しました。  
 
-<img src='./top_readme.png' width=40%>
-<img src='./user_readme.png' width=40%>
+<img src='./top_readme.png' width=40%> <img src='./user_readme.png' width=40%>
 
 ## URL
 https://weinance.xyz/
