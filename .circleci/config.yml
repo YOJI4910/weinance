@@ -2,9 +2,10 @@ version: 2
 jobs: 
   build: 
     docker: 
-      - image: circleci/ruby:2.6.3-stretch-node
+      - image: circleci/ruby:2.6.3-stretch-node-browsers
         environment:
           RAILS_ENV: test
+          RACK_ENV: test
           DB_HOST: 127.0.0.1
       - image: circleci/mysql:5.7
         environment:
@@ -28,26 +29,16 @@ jobs:
           paths:
             - ./vendor/bundle
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
-      # エラーでCircleCIが通らないの一旦コメントアウト
-      # - run: bundle exec rake db:create
-      # - run: bundle exec rake db:schema:load
-      # - run:
-      #     name: Rspec
-      #     command: |
-      #       mkdir /tmp/test-results
-      #       TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | \
-      #         circleci tests split --split-by=timings)"
-      #       bundle exec rspec \
-      #         --format progress \
-      #         --out /tmp/test-results/rspec.xml \
-      #         --format progress \
-      #         $TEST_FILES
   build_image:
     docker:
       - image: docker:19.03.5
     steps:
       - checkout
       - setup_remote_docker
+      - run:
+          name: Setup environment variable
+          command: |
+            echo "export COMPOSE_FILE=docker-compose.ci.yml" >> $BASH_ENV
       - run:
           name: install aws cli
           command: |

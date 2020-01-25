@@ -86,7 +86,7 @@ describe 'EditRegistration', type: :system do
         find('input.signin-as-guest-btn').click
         expect(page).to have_content 'ログインしました。'
         find('.header-avatar').click
-        click_on 'プロフィール編集'
+        find('#edit-profile').click
         expect(page).to have_content 'ゲストユーザーは利用できません'
         expect(current_path).to eq user_path(guest_user)
       end

@@ -30,7 +30,7 @@ gem 'omniauth-google-oauth2'
 gem 'faker'
 
 group :development, :test do
-  # gem 'minitest', '>= 5.12.0'
+  gem 'minitest', '>= 5.12.0'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'pry-rails'
   gem 'pry-byebug'
@@ -55,6 +55,3 @@ group :test do
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-
-
-
