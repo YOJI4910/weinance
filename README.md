@@ -47,6 +47,8 @@ https://weinance.xyz/
   * CircleCI
   * AWS(ECS, EC2, RDS, VPC, Route53, ALB, ACM)
   * Terraform
+* その他
+  * Twitter API, Facebook API, Google API
 
 ## Terraform
 awsのインフラをterraformで作成。
@@ -54,4 +56,4 @@ awsのインフラをterraformで作成。
 tfstateは、amazon S3 のバケットに保存しています。
 
 ## AWSアーキテクチャ図
-![awsのアーキテクチャ図](./cloud_architecture.png)
+<img src='./cloud_architecture.png' width=80%>
