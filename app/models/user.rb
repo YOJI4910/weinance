@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
-         :omniauthable, omniauth_providers: %i[facebook twitter google_oauth2]
+         :omniauthable, omniauth_providers: %i(facebook twitter google_oauth2)
 
   has_many :records
 
@@ -48,22 +48,22 @@ class User < ApplicationRecord
   end
 
   def avatar_url
-    url = self.image.url || "/assets/no_user.png"
-    return url
+    url = image.url || "/assets/no_user.png"
+    url
   end
 
   def display_height
-    if self.height.blank?
+    if height.blank?
       "―"
     else
-      "#{self.height} cm" 
+      "#{height} cm"
     end
   end
 
   # 過去30日の最高体重を返す
   def display_max
-    if self.has_record_in30?
-      "#{ self.records.
+    if has_record_in30?
+      "#{ records.
             where('created_at >= ?', 30.days.ago).
             pluck('weight').
             max.
@@ -75,8 +75,8 @@ class User < ApplicationRecord
 
   # 過去30日の最小体重を返す
   def display_min
-    if self.has_record_in30?
-      "#{ self.records.where('created_at >= ?', 30.days.ago).
+    if has_record_in30?
+      "#{ records.where('created_at >= ?', 30.days.ago).
             pluck('weight').
             min.
             round(Constants::NUM_OF_DECIMAL_IN_WEIGHT) } kg"
@@ -87,12 +87,12 @@ class User < ApplicationRecord
 
   # 最後に記録した体重を返す
   def latest_weight
-    if self.has_record?
-      self.records.
-          order(created_at: :DESC).
-          first.
-          weight.
-          round(Constants::NUM_OF_DECIMAL_IN_WEIGHT)
+    if has_record?
+      records.
+        order(created_at: :DESC).
+        first.
+        weight.
+        round(Constants::NUM_OF_DECIMAL_IN_WEIGHT)
     end
   end
 
@@ -105,25 +105,25 @@ class User < ApplicationRecord
   end
 
   def weight_change_rate
-    last_datas = self.records.where(created_at: Date.today.last_month.all_month)
+    last_datas = records.where(created_at: Date.today.last_month.all_month)
     last_avg = last_datas.pluck('weight').sum / last_datas.count
-    ((( self.latest_weight - last_avg ) / last_avg )*100).
+    (((latest_weight - last_avg) / last_avg) * 100).
       round(Constants::NUM_OF_DECIMAL_IN_CHANGE_RATE)
   rescue ZeroDivisionError, NoMethodError
     0
   end
 
   def display_change
-    if self.weight_change_rate >= 0
-      "+#{self.weight_change_rate}%"
+    if weight_change_rate >= 0
+      "+#{weight_change_rate}%"
     else
-      "#{self.weight_change_rate}%"
+      "#{weight_change_rate}%"
     end
   end
 
   # change_rateの値でcssのclass名を返す
   def change_class
-    if self.weight_change_rate >= 0
+    if weight_change_rate >= 0
       "pluscolor"
     else
       "minuscolor"
@@ -131,10 +131,10 @@ class User < ApplicationRecord
   end
 
   def bmi
-    if self.records.present? && self.height.present?
+    if records.present? && height.present?
       # 身長 cm -> m
-      height_m = self.height / 100
-      (self.latest_weight / (height_m * height_m) ).
+      height_m = height / 100
+      (latest_weight / (height_m**2)).
         round(Constants::NUM_OF_DECIMAL_IN_HEIGHT)
     else
       "―"
@@ -142,11 +142,11 @@ class User < ApplicationRecord
   end
 
   def has_record?
-    !!self.records.first
+    !!records.first
   end
 
   def has_record_in30?
-    !!self.records.where('created_at >= ?', 30.days.ago).first
+    !!records.where('created_at >= ?', 30.days.ago).first
   end
 
   # ゲストユーザーであればtrue
@@ -156,20 +156,17 @@ class User < ApplicationRecord
 
   # omniauthのコールバック時に呼ばれるメソッド
   def self.find_for_oauth(auth)
-    user = User.where(uid: auth.uid, provider: auth.provider).first
-    unless user
-      user = User.create(
+    user = User.find_or_initialize_by(uid: auth.uid, provider: auth.provider)
+    if user.new_record?
+      user.update_attributes!(
         name: auth.info.name,
         email: User.dumy_email(auth),
-        uid: auth.uid,
-        provider: auth.provider,
         password: Devise.friendly_token[0, 20]
       )
     end
     user
   end
 
-  private
   def self.dumy_email(auth)
     "#{auth.uid}-#{auth.provider}@example.com"
   end

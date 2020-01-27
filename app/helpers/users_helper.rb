@@ -1,3 +1,3 @@
 module UsersHelper
-	include Pagy::Frontend
+  include Pagy::Frontend
 end
