@@ -1,0 +1,27 @@
+.notification-wrapper {
+  padding: 10px;
+
+  .notification {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #ecf0f1;
+
+    &-avatar {
+      margin-right: 20px;
+
+      .header-avatar {
+        border-radius: 50%;
+        width: 50px;
+        min-width: 50px;
+      }
+    }
+
+    &-msg {
+      .notification-time {
+        font-size: 1.4rem;
+      }
+    }
+  }
+}

@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  root to: 'records#index'
+
   devise_for :users, controllers: {
     registrations: 'users/registrations',
     sessions: 'users/sessions',
@@ -10,7 +12,6 @@ Rails.application.routes.draw do
     get '/login', to: 'users/sessions#new'
   end
 
-  root to: 'records#index'
   get '/privacy', to: 'static_pages#privacy'
 
   resources :users, only: [:show] do
@@ -23,6 +24,8 @@ Rails.application.routes.draw do
     post :relationships_inshow, to: 'relationships#create_inshow'
     delete :relationships_inshow, to: 'relationships#destroy_inshow'
   end
+
   resources :records
+  resources :notifications, only: :index
   resources :health_check, only: [:index]
 end
