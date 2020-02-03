@@ -1,0 +1,27 @@
+- visitor = notification.visitor
+- visited = notification.visited
+
+.notification-wrapper
+  .notification
+    .notification-avatar
+      = link_to user_path(visitor) do
+        = image_tag visitor.avatar_url, class: 'header-avatar'
+    .notification-msg
+      strong
+        = visitor.name
+      | さんが
+
+      - case notification.action
+      - when 'follow' then
+        = "あなたをフォローしました。"
+      - when 'fav' then
+        = link_to "あなたの投稿", notification.record, style: "font-weight: bold;"
+        = "をお気に入りにしました。"
+      - when 'comment' then
+        = link_to "あなたの投稿", notification.record, style: "font-weight: bold;"
+        = "にコメントしました。"
+        p.text-muted.mb-0
+          = Comment.find_by(id: notification.comment_id)&.body
+          
+      .notification-time.text-muted
+        = time_ago_in_words(notification.created_at).downcase + "前"

@@ -6,6 +6,8 @@ class RelationshipsController < ApplicationController
     current_user.follow(follow_user)
     # フォロー後user情報更新
     @follow_user = User.find(params[:user_id])
+    # フォロー通知
+    @follow_user.create_notification_follow!(current_user)
     # create.js.erbでrenderされる
   end
 

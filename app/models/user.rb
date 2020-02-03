@@ -3,11 +3,22 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :omniauthable, omniauth_providers: %i(facebook twitter google_oauth2)
 
-  has_many :records
+  has_many :records, dependent: :destroy
 
-  validates :name, presence: true, length: { maximum: 30 }
-  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i.freeze
-  validates :email, length: { maximum: 255 }, format: { with: VALID_EMAIL_REGEX }
+  # 通知モデルの関連付け
+  has_many(
+    :active_notifications,
+    class_name: 'Notification',
+    foreign_key: 'visitor_id',
+    dependent: :destroy
+  )
+
+  has_many(
+    :passive_notifications,
+    class_name: 'Notification',
+    foreign_key: 'visited_id',
+    dependent: :destroy
+  )
 
   # ========================================================フォローしているユーザー視点
   # 中間テーブルと関係. 外部キーはfollowing_id
@@ -31,6 +42,10 @@ class User < ApplicationRecord
   # followerテーブルとの関係. ただしacitve_relationshipsテーブルのfollowerカラムを介して
   has_many :followers, through: :passive_relationships, source: :following
   # ====================================================================================
+
+  validates :name, presence: true, length: { maximum: 30 }
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i.freeze
+  validates :email, length: { maximum: 255 }, format: { with: VALID_EMAIL_REGEX }
 
   mount_uploader :image, ImageUploader
 
@@ -169,5 +184,24 @@ class User < ApplicationRecord
 
   def self.dumy_email(auth)
     "#{auth.uid}-#{auth.provider}@example.com"
+  end
+
+  # フォロー時の通知メソッド(アクセプターはfollowされるuser)
+  def create_notification_follow!(current_user)
+    # すでに同じ通知がないか確認（連打対策）
+    temp = Notification.where([
+      "visitor_id = ? and visited_id = ? and action = ? ",
+      current_user.id,
+      self.id,
+      'follow',
+    ])
+
+    if temp.blank?
+      notification = current_user.active_notifications.new(
+        visited_id: self.id,
+        action: 'follow'
+      )
+      notification.save if notification.valid?
+    end
   end
 end

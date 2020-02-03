@@ -1,5 +1,6 @@
 class Record < ApplicationRecord
   belongs_to :user
+  has_many :notifications, dependent: :destroy
 
   def display_weight
     "#{weight.round(Constants::NUM_OF_DECIMAL_IN_WEIGHT)} kg"

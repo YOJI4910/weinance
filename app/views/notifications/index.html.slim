@@ -1,0 +1,9 @@
+/ 自分の投稿に対するいいね、コメントは通知に表示しない
+- notifications = @notifications.where.not(visitor_id: current_user.id)
+
+section.notification-sec
+  - if notifications.exists?
+    = render notifications
+    == pagy_bootstrap_nav(@pagy) if @pagy.pages > 1
+  - else
+    p 通知はありません。

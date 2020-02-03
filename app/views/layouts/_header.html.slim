@@ -13,6 +13,13 @@ header.header
           li.header-item
             = link_to 'LogOut', destroy_user_session_path, method: :delete
           li.header-item
+            / 通知アイコン
+            = link_to notifications_path do
+              - if unchecked_notifications&.any?
+                = icon('far', 'bell', class:'notification-on')
+              - else
+                = icon('far', 'bell', class:'notification-off')
+          li.header-item
             = link_to current_user do
               = image_tag current_user.avatar_url, class: 'header-avatar'
         - else
