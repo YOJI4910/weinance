@@ -5,7 +5,7 @@
   .notification
     .notification-avatar
       = link_to user_path(visitor) do
-        = image_tag visitor.avatar_url, class: 'header-avatar'
+        = image_tag visitor.avatar_url, Zclass: 'header-avatar'
     .notification-msg
       strong
         = visitor.name
