@@ -3,7 +3,6 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    records = @user.records
     @records = @user.records.order(created_at: :desc)
     @followers = @user.followers
   end
