@@ -4,6 +4,7 @@ class User < ApplicationRecord
          :omniauthable, omniauth_providers: %i(facebook twitter google_oauth2)
 
   has_many :records, dependent: :destroy
+  has_many :comments, dependent: :destroy
 
   # 通知モデルの関連付け
   has_many(
@@ -111,6 +112,18 @@ class User < ApplicationRecord
     end
   end
 
+  # 最新の体重と前回の体重差を返す
+  def change_weight_msg
+    weights = records.order(created_at: "DESC").pluck(:weight)
+    if records.count >= 2
+      change = (weights[1] - weights[0]).round(Constants::NUM_OF_DECIMAL_IN_WEIGHT)
+      msg = change >= 0 ? "増加しました。" : "減少しました。"
+      "#{change.abs} kg #{msg}"
+    else
+      "―"
+    end
+  end
+
   def display_latest
     if latest_weight.present?
       "#{latest_weight} kg"
@@ -192,13 +205,13 @@ class User < ApplicationRecord
     temp = Notification.where([
       "visitor_id = ? and visited_id = ? and action = ? ",
       current_user.id,
-      self.id,
+      id,
       'follow',
     ])
 
     if temp.blank?
       notification = current_user.active_notifications.new(
-        visited_id: self.id,
+        visited_id: id,
         action: 'follow'
       )
       notification.save if notification.valid?

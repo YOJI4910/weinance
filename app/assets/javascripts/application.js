@@ -37,3 +37,28 @@ $(function() {
     readURL(this);
   });
 });
+
+$(function() {
+  // コメント機能
+  // formがからの時は投稿できない。
+  $(document).on("click", "input[type=submit]", function() {
+    if ($("textarea").val() == "") {
+      return false;
+    }
+  });
+
+  // コメントの投稿
+  $(document).on("ajax:success", ".comment-ajax", function(e) {
+    // comment form-fieldの記入をリセット
+    $(".comment-text-area").val("");
+    // comment areaの先頭に挿入
+    $(".show-comment-area").prepend(
+      "<div><p>" +
+        e.detail[0][1] +
+        "</p>" +
+        "<p>" +
+        e.detail[0][0] +
+        "</p></div>"
+    );
+  });
+});

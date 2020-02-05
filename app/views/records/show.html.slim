@@ -1,2 +1,24 @@
-h1 Records#show
-p Find me in app/views/records/show.html.slim
+section.record-show
+  .inner
+    .record-info
+      p.show-msg
+        = link_to "#{@user.name}さん", user_path(@user)
+        = "の最新体重は#{@user.display_latest}です。"
+      p.show-msg = "前回の記録から#{@user.change_weight_msg}"
+      .chart-wrapper
+        canvas#myChart
+    .record-comment
+      p.show-msg コメントで応援しましょう！
+      .comment-form-wrapper
+        = form_with(model: [@record, @comment], class: 'comment-ajax') do |f|
+          .form-group
+            = f.text_area :body, row: "3", placeholder: 'コメントを追加...', class:'form-control comment-text-area'
+          = f.submit '投稿する', class:'btn'
+      
+      .show-comment-area
+        - @comments.each do |comment|
+          div
+            p= comment.user.name
+            p= comment.body
+
+= render partial: 'shared/chart.js.slim', locals: { records: @records }

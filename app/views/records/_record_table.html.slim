@@ -2,6 +2,7 @@ table.users-table
   thead.users-table-head
   tr
     th.follow-col 
+    th.comment-col
     th.name-col Name
     th.weight-col Last Weight
     th.change-col 1mon. Chg
@@ -14,6 +15,10 @@ table.users-table
         tr id="record-#{record.id}"
           td id="follow-btn-#{user.id}" class="follow-data"
             = render partial: 'follow', locals: { user: user }
+          td 
+            = link_to record_path(record), class: 'comment-link' do
+              = icon('far', 'comment', class:'comment-icon')
+              = record.comments.count
           td
             = link_to user, class:"table-usernames" do
               = image_tag(user.avatar_url, class:'table-avatar')

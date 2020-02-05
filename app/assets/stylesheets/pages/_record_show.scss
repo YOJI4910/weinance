@@ -1,0 +1,93 @@
+section.record-show {
+  padding-top: 40px;
+
+  .inner {
+    .record-info {
+      padding-bottom: 40px;
+
+      .show-msg {
+        font-size: 2rem;
+
+        a {
+          font-size: 2.8rem;
+          color: #ee8b49;
+
+          &:hover {
+            color: #f5690b;
+          }
+        }
+      }
+
+      .chart-wrapper {
+        margin-top: 20px;
+
+        canvas {
+          max-width: 500px;
+          margin: 0 auto;
+        }
+      }
+    }
+
+    .record-comment {
+      .show-msg {
+        font-size: 2rem;
+        color: #f566ee;
+      }
+
+      .comment-form-wrapper {
+        width: 95%;
+        max-width: 600px;
+        margin: 0 auto;
+        margin-top: 10px;
+        margin-bottom: 10px;
+
+        form {
+          border-top: 1px solid #e6e6e6;
+          border-bottom: 1px solid #e6e6e6;
+          border-radius: 3px;
+          display: flex;
+
+          .form-group {
+            width: 90%;
+            margin: 0;
+          }
+
+          .btn {
+            font-size: 1.4rem;
+            color: #3498db;
+          }
+        }
+
+        .comment-text-area {
+          border: none;
+          resize: none;
+        }
+      }
+    }
+
+    .show-comment-area {
+      width: 100%;
+      max-width: 600px;
+      margin: 0 auto;
+
+      & > div {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        margin: 0 auto;
+        padding: 8px;
+        border-bottom: 1px solid #e6e6e6;
+
+        p {
+          margin-bottom: 0;
+
+          &:first-of-type {
+            font-weight: 700;
+            margin-right: 20px;
+            color: #3498db;
+          }
+        }
+      }
+    }
+  }
+}

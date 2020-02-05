@@ -16,6 +16,14 @@ class RecordsController < ApplicationController
     end
   end
 
+  def show
+    @record = Record.find(params[:id])
+    @user = @record.user
+    @records = @user.records
+    @comments = @record.comments.order(id: "DESC")
+    @comment = Comment.new
+  end
+
   def new
     @record = Record.new
   end
