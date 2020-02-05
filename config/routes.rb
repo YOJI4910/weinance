@@ -8,15 +8,15 @@ Rails.application.routes.draw do
   }
 
   devise_scope :user do
-    get '/about', to: 'static_pages#about'
     get '/login', to: 'users/sessions#new'
   end
 
   get '/privacy', to: 'static_pages#privacy'
+  get '/about', to: 'static_pages#about'
 
   resources :users, only: [:show] do
     resource :relationships, only: [:create, :destroy]
-    # resorcesにさらにルートを追加. memberは:idのあとに続くという意味
+    # resourcesにさらにルートを追加. memberは:idのあとに続くという意味
     get :follows, on: :member
     get :followers, on: :member
     post :relationships_inlist, to: 'relationships#create_inlist'
@@ -25,7 +25,10 @@ Rails.application.routes.draw do
     delete :relationships_inshow, to: 'relationships#destroy_inshow'
   end
 
-  resources :records
+  resources :records do
+    resource :comments, only: [:create, :destroy]
+  end
+
   resources :notifications, only: :index
   resources :health_check, only: [:index]
 end

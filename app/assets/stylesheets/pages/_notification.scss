@@ -4,7 +4,9 @@
   .notification {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: left;
+    width: 80%;
+    margin: 0 auto;
     padding-bottom: 5px;
     border-bottom: 1px solid #ecf0f1;
 
@@ -21,6 +23,10 @@
     &-msg {
       .notification-time {
         font-size: 1.4rem;
+
+        i {
+          margin-right: 3px;
+        }
       }
     }
   }

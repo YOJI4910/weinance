@@ -38,6 +38,7 @@ users= User.all
     )
   end
 end
+
 # リレーション
 users.each do |user|
   followings = users.where.not(id: user.id).sample(14)

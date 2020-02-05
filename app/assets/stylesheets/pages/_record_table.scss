@@ -13,6 +13,10 @@ table.users-table {
   }
 
   .follow-col {
+    width: 40px;
+  }
+
+  .comment-col {
     width: 50px;
   }
 
@@ -71,6 +75,14 @@ table.users-table {
 
     .follow-data{
       text-align: center;
+    }
+
+    .comment-link {
+      color: rgb(100, 100, 100);
+
+      .comment-icon {
+        margin-right: 2px;
+      }
     }
   }
 }

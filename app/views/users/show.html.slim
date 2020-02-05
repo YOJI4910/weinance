@@ -55,50 +55,5 @@ section.show-sec
         .content3.follower-grid
           = render partial: 'follower_list', collection: @followers, as: 'follower'
 
-javascript:
-  // showページタブ切り替え
-  $('.tab-content>div').hide();
-  $('.tab-content>div').first().slideDown();
-  $('.tab-btns span').click(function(){
-    var thisclass=$(this).attr('class');
-    $('#lamp').removeClass().addClass('#lamp').addClass(thisclass);
-    $('.tab-content>div').each(function(){
-      if($(this).hasClass(thisclass)){
-        $(this).fadeIn(800);
-      }
-      else{
-        $(this).hide();
-      }
-    });
-  });
-  // チャート
-  var ctx = document.getElementById("myChart").getContext('2d');
-  var Graph = new Chart(ctx, {
-    type: 'line',
-    data: {
-      labels: #{{@labels.to_json}},
-      datasets: [
-        {
-          label: '過去1ヶ月の体重の変化',
-          data: #{{@datas.to_json}},
-          borderColor: 'rgba(255,0,0,1)',
-          backgroundColor: 'rgba(0,0,0,0)'
-        }
-      ],
-    },
-    option: {
-      title: {
-        display: true,
-        text: ''
-      },
-      scales: {
-        xAxes: [{ //x軸設定
-          type: 'time',
-          time: {
-            unit: 'day',
-            distribution: 'liner'
-          }
-        }]
-      },
-    }
-  });
+/ チャート(Javascript)の読み込み
+= render partial: 'shared/chart.js.slim', locals: { records: @records }
