@@ -34,12 +34,14 @@ section.show-sec
 
     .tabs
       .tab-btns
-        span.content1 記録履歴
-        span.content2 グラフ
+        span.content1 グラフ
+        span.content2 記録履歴
         span.content3 フォロワー
         #lamp.content1
       .tab-content
         .content1
+          canvas#myChart
+        .content2
           table.users-table
             thead.users-table-head
               tr
@@ -50,8 +52,6 @@ section.show-sec
                   th.edit-col
             tbody.users-table-body
               = render partial: 'record_history', collection: @records, as: 'record'
-        .content2
-          canvas#myChart
         .content3.follower-grid
           = render partial: 'follower_list', collection: @followers, as: 'follower'
 
