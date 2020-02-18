@@ -5,12 +5,12 @@ class RecordsController < ApplicationController
   before_action :authenticate_user!, except: :index
 
   def index
-    user_ids = Record.all.pluck(:user_id)
+    user_ids = Record.pluck(:user_id).uniq
     records = get_ordered_records(user_ids)
     @pagy_all, @records = pagy(records, page_param: :page_all, params: { active_tab: 'all' })
-    # current_userのfollowingリスト
-    follow_ids = current_user.active_relationships.pluck(:follower_id) if current_user.present?
-    if follow_ids.present?
+
+    if user_signed_in?
+      follow_ids = current_user.active_relationships.pluck(:follower_id).uniq
       records = get_ordered_records(follow_ids)
       @pagy_fav, @fav_records = pagy(records, page_param: :page_fav, params: { active_tab: 'favs' })
     end
